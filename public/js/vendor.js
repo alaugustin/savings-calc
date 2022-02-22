@@ -1,3 +1,4 @@
+// https://rapidapi.com/collectapi/api/gas-price/
 let gasPrice = {
   success: true,
   result: [
@@ -54,4 +55,14 @@ let gasPrice = {
   ],
 };
 
-console.log(gasPrice.result);
+// https://fixer.io/
+let currency = {
+  "base": "USD",
+  "date": "2018-02-13",
+  "rates": {
+     "CAD": 1.260046,
+     "CHF": 0.933058,
+     "EUR": 0.806942,
+     "GBP": 0.719154,
+  }
+};   
