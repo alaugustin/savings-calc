@@ -10,15 +10,13 @@ function handleSubmit(event) {
 
   const data = new FormData(event.target);
 
-  const value = Object.fromEntries(data.entries());
-
-  console.log({ value });
+  const userData = Object.fromEntries(data.entries());
 
   console.log(`Ontario gas price: ${onGasPriceCad}`);
-  console.log(`Ontario gas price (total): ${onGasPriceCad * value.gas}`);
+  console.log(`Ontario gas price (total): ${onGasPriceCad * userData.gas}`);
 
   console.log(`Manitoba gas price: ${mbGasPriceCad}`);  
-  console.log(`Manitoba gas price (total): ${mbGasPriceCad * value.gas}`);
+  console.log(`Manitoba gas price (total): ${mbGasPriceCad * userData.gas}`);
 }
 
 const form = document.querySelector("form");
