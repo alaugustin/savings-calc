@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Main Page</h1>
+  <ul>
+    <li><a href="index.html">main</a></li>
+    <li><a href="response.html">response</a></li>
+  </ul>
+  
+  <hr>
+
+  <form action="./response.html" method="post">
+    <input type="radio" id="on" name="fav_language" value="on">
+    <label for="on">Ontario</label><br>
+  
+    <input type="radio" id="mb" name="fav_language" value="mb">
+    <label for="mb">Manitoba</label><br>
+  
+    <label for="gas">How many tanks of gas?</label><br>
+    <input type="number" id="gas" name="gas"><br>
+  
+    <label for="wash">How many car washes?</label><br>
+    <input type="number" id="wash" name="wash"><br>
+  
+    <label for="washType">Type of wash:</label><br>
+    <select name="washType" id="washType">
+      <option value="basic">Basic</option>
+      <option value="deluxe">Deluxe</option>
+      <option value="ultimate">Ultimate</option>
+    </select><br>
+  </form>
+</body>
+
+</html>
