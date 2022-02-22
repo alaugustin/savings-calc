@@ -12,11 +12,24 @@ function handleSubmit(event) {
 
   const userData = Object.fromEntries(data.entries());
 
+  console.log(`> ------------------------- <}`);
+
+  console.log(`Location: ${userData.location}`);
+  console.log(`Tanks of gas: ${userData.gas}`);
+  console.log(`----------}`);
+
+  console.log(`Carwashes: ${userData.wash}`);
+  console.log(`Wash type: ${userData.washType}`);
+  console.log(`----------}`);
+  
   console.log(`Ontario gas price: ${onGasPriceCad}`);
   console.log(`Ontario gas price (total): ${onGasPriceCad * userData.gas}`);
+  console.log(`----------}`);
 
   console.log(`Manitoba gas price: ${mbGasPriceCad}`);  
   console.log(`Manitoba gas price (total): ${mbGasPriceCad * userData.gas}`);
+
+  console.log(`> ------------------------- <}`);
 }
 
 const form = document.querySelector("form");
