@@ -10,3 +10,5 @@ function handleSubmit(event) {
 
 const form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
+
+console.log(gasPrice.result);
