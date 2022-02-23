@@ -39,26 +39,29 @@ function handleSubmit(event) {
 
   console.log(`> ------------------------- <}`);
   console.log(`Location: ${appData.userLocation}`);
-
-  console.log(`----------}`);
   console.log(`Tanks of gas: ${appData.numberOfTanks}`);
-  console.log(
-    `Ontario gas price (total): ${
-    }`
-  );
 
-  console.log(
-    `Manitoba gas price (total): ${
-    }`
-  );
+  if (appData.userLocation === "on") {
     console.log(
       `Ontario gas price: ${appData.location.on.GasPriceCad.toFixed(2)}`
     );
+    console.log(
+      `Ontario gas price (total): ${
         (appData.location.on.GasPriceCad * appData.numberOfTanks).toFixed(2)
+      }`
+    );
+  }
+
+  if (appData.userLocation === "mb") {
     console.log(
       `Manitoba gas price: ${appData.location.mb.GasPriceCad.toFixed(2)}`
     );
+    console.log(
+      `Manitoba gas price (total): ${(
         appData.location.mb.GasPriceCad * appData.numberOfTanks).toFixed(2)
+      }`
+    );
+  }
   
   console.log(`Exchange rate as of: ${appData.exchangeRateDate}`);
 
