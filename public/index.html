@@ -28,13 +28,15 @@
     <input type="number" id="wash" name="wash"><br>
 
     <!-- CONDITIONALLY SHOW IF # OF WASHES IS GREATER THAN 1 -->
-    <label for="washType">What type of car wash do you purchase?</label><br>
-    <select name="washType" id="washType">
-      <option value="">-----</option>
-      <option value="basic">Basic</option>
-      <option value="deluxe">Deluxe</option>
-      <option value="ultimate">Ultimate</option>
-    </select><br>
+    <div id="washTypeHolder">
+      <label for="washType">What type of car wash do you purchase?</label><br>
+      <select name="washType" id="washType">
+        <option value="">-----</option>
+        <option value="basic">Basic</option>
+        <option value="deluxe">Deluxe</option>
+        <option value="ultimate">Ultimate</option>
+      </select><br>
+    </div>
 
     <label for="sundries">How much do you spend in-store per week?</label><br>
     <input type="number" id="sundries" name="sundries"><br>

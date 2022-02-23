@@ -13,14 +13,14 @@ let onGasPriceCad = onGasPriceUs * exchangeRate;
 let mbGasPriceCad = mbGasPriceUs * exchangeRate;
 
 function resultsDisplay(
-  locationFlag, 
-  fullTankLitres, 
-  fuelSavings, 
-  weeksPerYear, 
-  numberOfTanks, 
-  gasPriceCadFixed, 
-  numberOfWash, 
-  washType, 
+  locationFlag,
+  fullTankLitres,
+  fuelSavings,
+  weeksPerYear,
+  numberOfTanks,
+  gasPriceCadFixed,
+  numberOfWash,
+  washType,
   sundries) {
   resultsDiv.innerHTML += `
     <h2>Example of yearly savings	</h2>
@@ -34,7 +34,7 @@ function resultsDisplay(
     <p>Approx. total annual savings: That’s $XXX.XX per year!</p>
     <hr>
     <p>How many tanks of gas per week?: ${numberOfTanks}</p>
-    <p>${locationFlag} gas price: ${ gasPriceCadFixed }</p >
+    <p>${locationFlag} gas price: ${gasPriceCadFixed}</p >
     <p>How many car washes per week do you purchase along with gas?: ${numberOfWash}</p>
     <p>What type of car wash do you purchase?: ${washType}</p>
     <p>How much do you spend in-store per week?: ${sundries}</p>
@@ -42,8 +42,16 @@ function resultsDisplay(
 }
 
 function hideShowWashType(washAmount) {
-  var washTrigger = 
-    washAmount > 1 ? console.log(`there are ${washAmount} washes`) : console.log(`there are no washes`);    
+  var washTrigger =
+    washAmount > 1 ? document.getElementById("washTypeHolder").style.display = "block" : document.getElementById("washTypeHolder").style.display = "none";
+
+  const selectElement = document.getElementById("wash");
+
+  selectElement.addEventListener('change', (event) => {
+    event.target.value > 0
+      ? document.getElementById("washTypeHolder").style.display = "block"
+      : document.getElementById("washTypeHolder").style.display = "none";
+  });
 }
 
 hideShowWashType(0)
@@ -85,8 +93,8 @@ function handleSubmit(event) {
     appData.fuelSavings,
     appData.weeksPerYear,
     appData.numberOfTanks,
-    appData.userLocation === "on" 
-      ? appData.location.on.GasPriceCad.toFixed(2) 
+    appData.userLocation === "on"
+      ? appData.location.on.GasPriceCad.toFixed(2)
       : appData.location.mb.GasPriceCad.toFixed(2),
     appData.numberOfWash,
     appData.washType,
