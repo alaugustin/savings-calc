@@ -25,10 +25,11 @@ function resultsDisplay(
   resultsDiv.innerHTML += `
     <h2>Example of yearly savings	</h2>
     <p>Location: ${locationFlag}</p>
-    <p>One Full Tank A Week:	${fullTankLitres} litres</p>
-    <p>Fuel Savings:	${fuelSavings} per litre</p>
-    <p>Weeks Per Year:	${weeksPerYear}</p>
-    <p>Annual Savings:	That's $XX.XX a year!</p>
+    <p>One Full Tank A Week: ${fullTankLitres} litres</p>
+    <p>Fuel Savings: ${fuelSavings} per litre</p>
+    <p>Weeks Per Year: ${weeksPerYear}</p>
+    <hr>
+    <p>Annual Savings: That's $XX.XX a year!</p>
     <p>Approx. total annual spending: $XXX.XX</p>
     <p>Approx. total annual savings: That’s $XXX.XX per year!</p>
     <hr>
@@ -39,6 +40,13 @@ function resultsDisplay(
     <p>How much do you spend in-store per week?: ${sundries}</p>
   `;
 }
+
+function hideShowWashType(washAmount) {
+  var washTrigger = 
+    washAmount > 1 ? console.log(`there are ${washAmount} washes`) : console.log(`there are no washes`);    
+}
+
+hideShowWashType(0)
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -68,6 +76,8 @@ function handleSubmit(event) {
       },
     },
   };
+
+  hideShowWashType(appData.numberOfWash);
 
   resultsDisplay(
     appData.userLocation,
