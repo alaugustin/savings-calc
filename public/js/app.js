@@ -1,4 +1,6 @@
 // data from data.js
+const resultsDiv = document.getElementById("results");
+
 let onGasPriceUs = gasPrice.result[6].gasoline;
 let mbGasPriceUs = gasPrice.result[2].gasoline;
 let exchangeRate = currency.rates.CAD;
@@ -11,12 +13,9 @@ function handleSubmit(event) {
   event.preventDefault();
 
   const data = new FormData(event.target);
-
   const userData = Object.fromEntries(data.entries());
 
   let appData = {
-    onGasPriceUs: onGasPriceUs,
-    mbGasPriceUs: mbGasPriceUs,
     exchangeRate: exchangeRate,
     exchangeRateDate: ratesAsOf,
     userLocation: userData.location,
@@ -35,41 +34,36 @@ function handleSubmit(event) {
     },
   };
 
-  // console.log(userData.gas);
-
-  console.log(`> ------------------------- <}`);
-  console.log(`Location: ${appData.userLocation}`);
-  console.log(`Tanks of gas: ${appData.numberOfTanks}`);
+  // console.log(userData.gas);  
+  resultsDiv.innerHTML += `
+    Location: ${appData.userLocation} <br>
+    Tanks of gas: ${appData.numberOfTanks}<br>
+  `;
 
   if (appData.userLocation === "on") {
-    console.log(
-      `Ontario gas price: ${appData.location.on.GasPriceCad.toFixed(2)}`
-    );
-    console.log(
-      `Ontario gas price (total): ${
-        (appData.location.on.GasPriceCad * appData.numberOfTanks).toFixed(2)
-      }`
-    );
+    resultsDiv.innerHTML += `
+      Ontario gas price: ${appData.location.on.GasPriceCad.toFixed(2)}<br>
+      Ontario gas price (total): ${(
+        appData.location.on.GasPriceCad * appData.numberOfTanks
+      ).toFixed(2)}<br>
+    `;
   }
 
   if (appData.userLocation === "mb") {
-    console.log(
-      `Manitoba gas price: ${appData.location.mb.GasPriceCad.toFixed(2)}`
-    );
-    console.log(
-      `Manitoba gas price (total): ${(
-        appData.location.mb.GasPriceCad * appData.numberOfTanks).toFixed(2)
-      }`
-    );
+    resultsDiv.innerHTML += `
+      Manitoba gas price: ${appData.location.mb.GasPriceCad.toFixed(2)} <br>
+      Manitoba gas price (total): ${(
+        appData.location.mb.GasPriceCad * appData.numberOfTanks
+      ).toFixed(2)}<br>
+    `;
   }
-  
-  console.log(`Exchange rate as of: ${appData.exchangeRateDate}`);
 
-  console.log(`----------}`);
-  console.log(`Carwashes: ${appData.numberOfWash}`);
-  console.log(`Wash type: ${appData.washType}`);
+  resultsDiv.innerHTML += `
+    Carwashes: ${appData.numberOfWash} <br>
+    Wash type: ${appData.washType}<br>
+  `;
 
-  console.log(`> ------------------------- <}`);
+  console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
 }
 
 const form = document.querySelector("form");
