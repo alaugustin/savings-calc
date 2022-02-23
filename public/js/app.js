@@ -4,8 +4,8 @@ let mbGasPriceUs = gasPrice.result[2].gasoline;
 let exchangeRate = currency.rates.CAD;
 let ratesAsOf = currency.date;
 
-let onGasPriceCad = (onGasPriceUs * exchangeRate).toFixed(2);
-let mbGasPriceCad = (mbGasPriceUs * exchangeRate).toFixed(2);
+let onGasPriceCad = onGasPriceUs * exchangeRate;
+let mbGasPriceCad = mbGasPriceUs * exchangeRate;
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -25,12 +25,12 @@ function handleSubmit(event) {
     washType: userData.washType,
     location: {
       on: {
-        onGasPriceUs: onGasPriceUs,
-        onGasPriceCad: onGasPriceCad,
+        GasPriceUs: onGasPriceUs,
+        GasPriceCad: onGasPriceCad,
       },
       mb: {
-        mbGasPriceUs: mbGasPriceUs,
-        mbGasPriceCad: mbGasPriceCad,
+        GasPriceUs: mbGasPriceUs,
+        GasPriceCad: mbGasPriceCad,
       },
     },
   };
@@ -42,19 +42,23 @@ function handleSubmit(event) {
 
   console.log(`----------}`);
   console.log(`Tanks of gas: ${appData.numberOfTanks}`);
-  console.log(`Ontario gas price: ${appData.location.on.onGasPriceCad}`);
   console.log(
     `Ontario gas price (total): ${
-      appData.location.on.onGasPriceCad * appData.numberOfTanks
     }`
   );
 
-  console.log(`Manitoba gas price: ${appData.location.mb.mbGasPriceCad}`);
   console.log(
     `Manitoba gas price (total): ${
-      appData.location.mb.mbGasPriceCad * appData.numberOfTanks
     }`
   );
+    console.log(
+      `Ontario gas price: ${appData.location.on.GasPriceCad.toFixed(2)}`
+    );
+        (appData.location.on.GasPriceCad * appData.numberOfTanks).toFixed(2)
+    console.log(
+      `Manitoba gas price: ${appData.location.mb.GasPriceCad.toFixed(2)}`
+    );
+        appData.location.mb.GasPriceCad * appData.numberOfTanks).toFixed(2)
   
   console.log(`Exchange rate as of: ${appData.exchangeRateDate}`);
 
