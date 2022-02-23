@@ -22,6 +22,7 @@ function handleSubmit(event) {
     numberOfTanks: userData.gas,
     numberOfWash: userData.wash,
     washType: userData.washType,
+    sundries: userData.sundries,
     location: {
       on: {
         GasPriceUs: onGasPriceUs,
@@ -61,6 +62,10 @@ function handleSubmit(event) {
   resultsDiv.innerHTML += `
     Carwashes: ${appData.numberOfWash} <br>
     Wash type: ${appData.washType}<br>
+    Sundries: ${appData.sundries}<br>
+    Approx. total annual spending: $XXX.XX<br>
+    Weeks per year: 52<br>
+    Approx. total annual savings: That’s $XXX.XX per year!<br>
   `;
 
   console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
