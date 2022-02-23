@@ -56,8 +56,9 @@ let gasPrice = {
 };
 
 // https://fixer.io/
+const USD = "USD";
 let currency = {
-  "base": "USD",
+  "base": USD,
   "date": "2018-02-13",
   "rates": {
      "CAD": 1.260046,
