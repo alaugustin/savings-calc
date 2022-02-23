@@ -1,5 +1,8 @@
 // data from data.js
 const resultsDiv = document.getElementById("results");
+const weeksPerYear = 52;
+const fullTankLitres = 55;
+const fuelSavings = 0.03;
 
 let onGasPriceUs = gasPrice.result[6].gasoline;
 let mbGasPriceUs = gasPrice.result[2].gasoline;
@@ -8,6 +11,34 @@ let ratesAsOf = currency.date;
 
 let onGasPriceCad = onGasPriceUs * exchangeRate;
 let mbGasPriceCad = mbGasPriceUs * exchangeRate;
+
+function resultsDisplay(
+  locationFlag, 
+  fullTankLitres, 
+  fuelSavings, 
+  weeksPerYear, 
+  numberOfTanks, 
+  gasPriceCadFixed, 
+  numberOfWash, 
+  washType, 
+  sundries) {
+  resultsDiv.innerHTML += `
+    <h2>Example of yearly savings	</h2>
+    <p>Location: ${locationFlag}</p>
+    <p>One Full Tank A Week:	${fullTankLitres} litres</p>
+    <p>Fuel Savings:	${fuelSavings} per litre</p>
+    <p>Weeks Per Year:	${weeksPerYear}</p>
+    <p>Annual Savings:	That's $XX.XX a year!</p>
+    <p>Approx. total annual spending: $XXX.XX</p>
+    <p>Approx. total annual savings: That’s $XXX.XX per year!</p>
+    <hr>
+    <p>How many tanks of gas per week?: ${numberOfTanks}</p>
+    <p>${locationFlag} gas price: ${ gasPriceCadFixed }</p >
+    <p>How many car washes per week do you purchase along with gas?: ${numberOfWash}</p>
+    <p>What type of car wash do you purchase?: ${washType}</p>
+    <p>How much do you spend in-store per week?: ${sundries}</p>
+  `;
+}
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -23,6 +54,9 @@ function handleSubmit(event) {
     numberOfWash: userData.wash,
     washType: userData.washType,
     sundries: userData.sundries,
+    weeksPerYear: weeksPerYear,
+    fullTankLitres: fullTankLitres,
+    fuelSavings: fuelSavings,
     location: {
       on: {
         GasPriceUs: onGasPriceUs,
@@ -35,38 +69,19 @@ function handleSubmit(event) {
     },
   };
 
-  // console.log(userData.gas);  
-  resultsDiv.innerHTML += `
-    Location: ${appData.userLocation} <br>
-    Tanks of gas: ${appData.numberOfTanks}<br>
-  `;
-
-  if (appData.userLocation === "on") {
-    resultsDiv.innerHTML += `
-      Ontario gas price: ${appData.location.on.GasPriceCad.toFixed(2)}<br>
-      Ontario gas price (total): ${(
-        appData.location.on.GasPriceCad * appData.numberOfTanks
-      ).toFixed(2)}<br>
-    `;
-  }
-
-  if (appData.userLocation === "mb") {
-    resultsDiv.innerHTML += `
-      Manitoba gas price: ${appData.location.mb.GasPriceCad.toFixed(2)} <br>
-      Manitoba gas price (total): ${(
-        appData.location.mb.GasPriceCad * appData.numberOfTanks
-      ).toFixed(2)}<br>
-    `;
-  }
-
-  resultsDiv.innerHTML += `
-    Carwashes: ${appData.numberOfWash} <br>
-    Wash type: ${appData.washType}<br>
-    Sundries: ${appData.sundries}<br>
-    Approx. total annual spending: $XXX.XX<br>
-    Weeks per year: 52<br>
-    Approx. total annual savings: That’s $XXX.XX per year!<br>
-  `;
+  resultsDisplay(
+    appData.userLocation,
+    appData.fullTankLitres,
+    appData.fuelSavings,
+    appData.weeksPerYear,
+    appData.numberOfTanks,
+    appData.userLocation === "on" 
+      ? appData.location.on.GasPriceCad.toFixed(2) 
+      : appData.location.mb.GasPriceCad.toFixed(2),
+    appData.numberOfWash,
+    appData.washType,
+    appData.sundries
+  );
 
   console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
 }
