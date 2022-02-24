@@ -70,7 +70,6 @@ let handleSubmit = (event) => {
     fuelSavings: fuelSavings,
     location: {
       on: {
-        GasPriceUs: onGasPriceUs,
         GasPriceCad: onGasPriceCad,
         carWash: {
           basic: {
@@ -85,8 +84,7 @@ let handleSubmit = (event) => {
         },
       },
       mb: {
-        GasPriceUs: onGasPriceUs,
-        GasPriceCad: onGasPriceCad,
+        GasPriceCad: mbGasPriceCad,
         carWash: {
           basic: {
             price: 7.99,
@@ -118,11 +116,10 @@ let handleSubmit = (event) => {
     appData.sundries
   );
 
-  console.log(
-    appData.userLocation === "on"
-      ? console.log(appData.location.on.carWash)
-      : console.log(appData.location.mb.carWash)
-  );
+  appData.userLocation === "on"
+    ? console.log(appData.location.on.carWash)
+    : console.log(appData.location.mb.carWash)
+
   console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
 }
 
