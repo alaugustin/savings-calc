@@ -1,27 +1,23 @@
+const selectElement = document.getElementById("wash"),
+  washTypeHolderDiv = document.getElementById("washTypeHolder"),
+  resultsDiv = document.getElementById("results"),
+  fuelSavings = 0.03,
+  fullTankLitres = 55,
+  weeksPerYear = 52;
+
 // data from data.js
-const resultsDiv = document.getElementById("results"), 
-  weeksPerYear = 52, 
-  fullTankLitres = 55, 
-  fuelSavings = 0.03;
+let exchangeRate = currency.rates.CAD,
+  mbGasPriceUs = gasPrice.result[2].gasoline,
+  ratesAsOf = currency.date,
+  onGasPriceUs = gasPrice.result[6].gasoline;
 
-let onGasPriceUs = gasPrice.result[6].gasoline, 
-  mbGasPriceUs = gasPrice.result[2].gasoline, 
-  exchangeRate = currency.rates.CAD, 
-  ratesAsOf = currency.date;
+let mbGasPriceCad = mbGasPriceUs * exchangeRate,
+  onGasPriceCad = onGasPriceUs * exchangeRate;
 
-let onGasPriceCad = onGasPriceUs * exchangeRate,
-  mbGasPriceCad = mbGasPriceUs * exchangeRate;
+console.log(mbGasPriceUs);
+console.log(onGasPriceUs);
 
-function resultsDisplay(
-  locationFlag,
-  fullTankLitres,
-  fuelSavings,
-  weeksPerYear,
-  numberOfTanks,
-  gasPriceCadFixed,
-  numberOfWash,
-  washType,
-  sundries) {
+let resultsDisplay = (locationFlag, fullTankLitres, fuelSavings, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries) => {
   resultsDiv.innerHTML += `
     <h2>Example of yearly savings	</h2>
     <p>Location: ${locationFlag}</p>
@@ -41,22 +37,21 @@ function resultsDisplay(
   `;
 }
 
-function hideShowWashType(washAmount) {
-  var washTrigger =
-    washAmount > 1 ? document.getElementById("washTypeHolder").style.display = "block" : document.getElementById("washTypeHolder").style.display = "none";
-
-  const selectElement = document.getElementById("wash");
+let hideShowWashType = () => {
+  selectElement > 1
+    ? washTypeHolderDiv.style.display = "block"
+    : washTypeHolderDiv.style.display = "none";
 
   selectElement.addEventListener('change', (event) => {
     event.target.value > 0
-      ? document.getElementById("washTypeHolder").style.display = "block"
-      : document.getElementById("washTypeHolder").style.display = "none";
+      ? washTypeHolderDiv.style.display = "block"
+      : washTypeHolderDiv.style.display = "none";
   });
 }
 
 hideShowWashType(0)
 
-function handleSubmit(event) {
+let handleSubmit = (event) => {
   event.preventDefault();
 
   const data = new FormData(event.target);
