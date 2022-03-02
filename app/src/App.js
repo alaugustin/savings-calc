@@ -12,8 +12,8 @@ function App() {
 
     setTimeout(() => {
       setSubmitting(false);
-      submitConfirmed();
-      
+      console.log("Form submitted");
+
     }, 3000)
   }
 
@@ -21,15 +21,11 @@ function App() {
     console.log(event.target.value);
   }
 
-  const submitConfirmed = () => {
-    console.log("Form submitted");
-  }
-
   const state = { 
     locationOnValue: "on",
     locationMbValue: "mb",
     numFieldInit: 0 
-  };
+  }; 
 
   return (
     <div>
