@@ -18,6 +18,7 @@ console.log(mbGasPriceUs);
 console.log(onGasPriceUs);
 
 let resultsDisplay = (locationFlag, fullTankLitres, fuelSavings, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries) => {
+  resultsDiv.innerHTML = ``;
   resultsDiv.innerHTML += `
     <h2>Example of yearly savings	</h2>
     <p>Location: ${locationFlag}</p>
