@@ -1,17 +1,33 @@
-// import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+
 import Input from './Input';
 import Label from './Label';
 
 function App() {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setSubmitting(true);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000)
+  }
+
   return (
     <div>
       <h1>Main Page</h1>
 
       <hr />
-
-      <form id="mainForm" method="post">
+      {/* https://reactjs.org/docs/forms.html */}
+      <form id="mainForm" onSubmit={handleSubmit}>
         <p>Select a province</p>
+
+        {submitting &&
+          <div>Submtting Form...</div>
+        }
 
         <Input labelType={"radio"} labelId={"on"} labelName={"location"} labelValue={"on"} />
         <Label htmlFor="on" labelCopy="Ontario" /><br />
