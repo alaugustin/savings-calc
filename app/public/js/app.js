@@ -1,7 +1,9 @@
 const selectElement = document.getElementById("wash"),
   washTypeHolderDiv = document.getElementById("washTypeHolder"),
   resultsDiv = document.getElementById("results"),
-  fuelSavings = 0.03,
+  fuelDiscount = 0.03,
+  washDiscount = 0.10,
+  sundriesDiscount = 0.10,
   fullTankLitres = 55,
   weeksPerYear = 52;
 
@@ -9,20 +11,26 @@ const selectElement = document.getElementById("wash"),
 let exchangeRate = currency.rates.CAD,
   mbGasPriceUs = gasPrice.result[2].gasoline,
   ratesAsOf = currency.date,
-  onGasPriceUs = gasPrice.result[6].gasoline;
+  onGasPriceUs = gasPrice.result[6].gasoline,
+  ontaxDataRate = onTaxData.applicable,
+  mbTaxDataRate = mbTaxData.applicable,
+  ontaxDataType = onTaxData.type,
+  mbTaxDataType = mbTaxData.type;
 
 let mbGasPriceCad = mbGasPriceUs * exchangeRate,
   onGasPriceCad = onGasPriceUs * exchangeRate;
 
 // -----
-let resultsDisplay = (locationFlag, fullTankLitres, fuelSavings, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
+let resultsDisplay = (locationFlag, fullTankLitres, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType, washDiscount, sundriesDiscount) => {
   resultsDiv.innerHTML = ``;
   resultsDiv.innerHTML += `
     <h2>Example of yearly savings	</h2>
     <p>Location: ${locationFlag}</p>
     <p>Tax rate: ${taxRate}${taxType}</p>
     <p>One Full Tank A Week: ${fullTankLitres} litres</p>
-    <p>Fuel Savings: ${fuelSavings} per litre</p>
+    <p>Fuel Savings: ${fuelDiscount} per litre</p>
+    <p>Wash discont: ${washDiscount}</p>
+    <p>In-store discont: ${sundriesDiscount}</p>
     <p>Weeks Per Year: ${weeksPerYear}</p>
     <hr>
     <p>How many tanks of gas per week?: ${numberOfTanks}</p>
@@ -69,11 +77,13 @@ let handleSubmit = (event) => {
     sundries: userData.sundries,
     weeksPerYear: weeksPerYear,
     fullTankLitres: fullTankLitres,
-    fuelSavings: fuelSavings,
+    fuelDiscount: fuelDiscount,
+    washDiscount: washDiscount,
+    sundriesDiscount: sundriesDiscount,
     location: {
       on: {
-        taxRate: onTaxData.applicable,
-        taxType: onTaxData.type,
+        taxRate: ontaxDataRate,
+        taxType: ontaxDataType,
         GasPriceCad: onGasPriceCad,
         carWash: {
           basic: {
@@ -88,8 +98,8 @@ let handleSubmit = (event) => {
         },
       },
       mb: {
-        taxRate: mbTaxData.applicable,
-        taxType: mbTaxData.type,
+        taxRate: mbTaxDataRate,
+        taxType: mbTaxDataType,
         GasPriceCad: mbGasPriceCad,
         carWash: {
           basic: {
@@ -111,7 +121,7 @@ let handleSubmit = (event) => {
   resultsDisplay(
     appData.userLocation,
     appData.fullTankLitres,
-    appData.fuelSavings,
+    appData.fuelDiscount,
     appData.weeksPerYear,
     appData.numberOfTanks,
     appData.userLocation === "on"
@@ -125,7 +135,9 @@ let handleSubmit = (event) => {
       : appData.location.mb.taxRate,
     appData.userLocation === "on"
       ? appData.location.on.taxType
-      : appData.location.mb.taxType
+      : appData.location.mb.taxType,
+    appData.washDiscount,
+    appData.sundriesDiscount
   );  
 
   console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
