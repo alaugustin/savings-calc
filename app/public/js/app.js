@@ -1,6 +1,4 @@
-const selectElement = document.getElementById("wash"),
-  washTypeHolderDiv = document.getElementById("washTypeHolder"),
-  resultsDiv = document.getElementById("results"),
+const resultsDiv = document.getElementById("results"),
   fuelDiscount = 0.03,
   washDiscount = 0.10,
   sundriesDiscount = 0.10,
@@ -45,19 +43,7 @@ let resultsDisplay = (locationFlag, fullTankLitres, fuelDiscount, weeksPerYear, 
   `;
 }
 
-// -----
-let hideShowWashType = () => {
-  selectElement > 1
-    ? washTypeHolderDiv.style.display = "block"
-    : washTypeHolderDiv.style.display = "none";
-
-  selectElement.addEventListener('change', (event) => {
-    event.target.value > 0
-      ? washTypeHolderDiv.style.display = "block"
-      : washTypeHolderDiv.style.display = "none";
-  });
-}
-
+// ----- hideShowWash.js
 hideShowWashType(0)
 
 // -----
