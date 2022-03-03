@@ -1,3 +1,24 @@
+const resultsDiv = document.getElementById("results"),
+  fuelDiscount = 0.03,
+  washDiscount = 0.10,
+  sundriesDiscount = 0.10,
+  fullTankLitres = 55,
+  weeksPerYear = 52;
+
+// data from data.js
+let exchangeRate = currency.rates.CAD,
+  mbGasPriceUs = gasPrice.result[2].gasoline,
+  ratesAsOf = currency.date,
+  onGasPriceUs = gasPrice.result[6].gasoline,
+  ontaxDataRate = onTaxData.applicable,
+  mbTaxDataRate = mbTaxData.applicable,
+  ontaxDataType = onTaxData.type,
+  mbTaxDataType = mbTaxData.type;
+
+let mbGasPriceCad = mbGasPriceUs * exchangeRate,
+  onGasPriceCad = onGasPriceUs * exchangeRate;
+
+// -------------------------
 let savingsCalculator = {
   version: '1.0',
   author: '',
@@ -73,17 +94,16 @@ let savingsCalculator = {
 
   onDomReady: () => {
     console.log("Works");
+
+    // ----- hideShowWash.js
+    hideShowWashType(0)
   },
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
   eventHandlers: () => {
-    // -----
+
     const form = document.querySelector("form");
     form.addEventListener("submit", handleSubmit);
-
-    // startButton.addEventListener("click", () => {
-    //   savingsCalculator.startGame();
-    // });
   },
 };
 
@@ -91,30 +111,3 @@ let savingsCalculator = {
 window.addEventListener("load", () => {
   savingsCalculator.init();
 });
-
-
-
-
-
-const resultsDiv = document.getElementById("results"),
-  fuelDiscount = 0.03,
-  washDiscount = 0.10,
-  sundriesDiscount = 0.10,
-  fullTankLitres = 55,
-  weeksPerYear = 52;
-
-// data from data.js
-let exchangeRate = currency.rates.CAD,
-  mbGasPriceUs = gasPrice.result[2].gasoline,
-  ratesAsOf = currency.date,
-  onGasPriceUs = gasPrice.result[6].gasoline,
-  ontaxDataRate = onTaxData.applicable,
-  mbTaxDataRate = mbTaxData.applicable,
-  ontaxDataType = onTaxData.type,
-  mbTaxDataType = mbTaxData.type;
-
-let mbGasPriceCad = mbGasPriceUs * exchangeRate,
-  onGasPriceCad = onGasPriceUs * exchangeRate;
-
-// ----- hideShowWash.js
-hideShowWashType(0)
