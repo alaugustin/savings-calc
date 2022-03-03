@@ -14,14 +14,13 @@ let exchangeRate = currency.rates.CAD,
 let mbGasPriceCad = mbGasPriceUs * exchangeRate,
   onGasPriceCad = onGasPriceUs * exchangeRate;
 
-console.log(mbGasPriceUs);
-console.log(onGasPriceUs);
-
-let resultsDisplay = (locationFlag, fullTankLitres, fuelSavings, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries) => {
+// -----
+let resultsDisplay = (locationFlag, fullTankLitres, fuelSavings, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
   resultsDiv.innerHTML = ``;
   resultsDiv.innerHTML += `
     <h2>Example of yearly savings	</h2>
     <p>Location: ${locationFlag}</p>
+    <p>Tax rate: ${taxRate}${taxType}</p>
     <p>One Full Tank A Week: ${fullTankLitres} litres</p>
     <p>Fuel Savings: ${fuelSavings} per litre</p>
     <p>Weeks Per Year: ${weeksPerYear}</p>
@@ -38,6 +37,7 @@ let resultsDisplay = (locationFlag, fullTankLitres, fuelSavings, weeksPerYear, n
   `;
 }
 
+// -----
 let hideShowWashType = () => {
   selectElement > 1
     ? washTypeHolderDiv.style.display = "block"
@@ -52,6 +52,7 @@ let hideShowWashType = () => {
 
 hideShowWashType(0)
 
+// -----
 let handleSubmit = (event) => {
   event.preventDefault();
 
@@ -71,6 +72,8 @@ let handleSubmit = (event) => {
     fuelSavings: fuelSavings,
     location: {
       on: {
+        taxRate: onTaxData.applicable,
+        taxType: onTaxData.type,
         GasPriceCad: onGasPriceCad,
         carWash: {
           basic: {
@@ -85,6 +88,8 @@ let handleSubmit = (event) => {
         },
       },
       mb: {
+        taxRate: mbTaxData.applicable,
+        taxType: mbTaxData.type,
         GasPriceCad: mbGasPriceCad,
         carWash: {
           basic: {
@@ -114,15 +119,18 @@ let handleSubmit = (event) => {
       : appData.location.mb.GasPriceCad.toFixed(2),
     appData.numberOfWash,
     appData.washType,
-    appData.sundries
-  );
-
-  appData.userLocation === "on"
-    ? console.log(appData.location.on.carWash)
-    : console.log(appData.location.mb.carWash)
+    appData.sundries,
+    appData.userLocation === "on"
+      ? appData.location.on.taxRate
+      : appData.location.mb.taxRate,
+    appData.userLocation === "on"
+      ? appData.location.on.taxType
+      : appData.location.mb.taxType
+  );  
 
   console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
 }
 
+// -----
 const form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
