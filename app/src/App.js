@@ -17,15 +17,42 @@ function App() {
     }, 3000)
   }
 
-  const onChangeValue = (event) => {
-    console.log(event.target.value);
-  }
+  const [location, setLocation] = useState("on");
+  const locationChangeHandler = (e) => {
+    const { value } = e.target;
+    setLocation(value);
+    console.log(`${value} location`);
+  };
 
-  const state = { 
-    locationOnValue: "on",
-    locationMbValue: "mb",
-    numFieldInit: 0 
-  }; 
+  const [gas, setGas] = useState(0);
+  const gasChangeHandler = (e) => {
+    const { value } = e.target;
+    setGas(value);
+    console.log(`${value} gas`);
+  };
+
+  const [wash, setWash] = useState(0);
+  const washChangeHandler = (e) => {
+    const { value } = e.target;
+    setWash(value);
+    console.log(`${value} wash`);
+  };
+
+  const [washType, setWashType] = useState("-----");
+  //store number
+  const washTypeChangeHandler = (e) => {
+    const { value } = e.target;
+    setWashType(value);
+    console.log(`${value} washType`);
+  };
+
+  const [sundries, setSundries] = useState(0);
+  //store number
+  const sundriesChangeHandler = (e) => {
+    const { value } = e.target;
+    setSundries(value);
+    console.log(`${value} sundries`);
+  };
 
   return (
     <div>
@@ -33,36 +60,36 @@ function App() {
 
       <hr />
       {/* https://reactjs.org/docs/forms.html | https://www.digitalocean.com/community/tutorials/how-to-build-forms-in-react | https://vegibit.com/a-simple-react-js-form-example/*/}
-      <form id="mainForm" onChange={onChangeValue} onSubmit={handleSubmit}>
+      <form id="mainForm" onSubmit={handleSubmit}>
         <p>Select a province</p>
 
         {submitting &&
           <div>Submtting Form...</div>
         }
 
-        <div>
-          <label htmlFor="on"><input type="radio" id="on" name="location" value="on" />Ontario</label>          
-          <label htmlFor="mb"><input type="radio" id="mb" name="location" value="mb" />Manitoba</label>
+        <div onChange={locationChangeHandler}>
+          <label htmlFor="on"><input type="radio" id="on" name="location" value={"on"} />Ontario</label>
+          <label htmlFor="mb"><input type="radio" id="mb" name="location" value={"mb"} />Manitoba</label>
         </div>
-        
+
         <div>
           <label htmlFor="gas">
             How many tanks of gas per week? <br />
-            <input type="number" id="gas" name="location" value={state.numFieldInit} />
+            <input type="number" id="gas" name="location" value={gas} onChange={gasChangeHandler} />
           </label>
         </div>
 
         <div>
           <label htmlFor="wash">
             How many car washes per week do you purchase along with gas? <br />
-            <input type="number" id="wash" name="location" value={state.numFieldInit} />
+            <input type="number" id="wash" name="location" value={wash} onChange={washChangeHandler} />
           </label>
         </div>
 
         <div>
           <label htmlFor="wash">
             What type of car wash do you purchase? <br />
-            <select name="washType" id="washType">
+            <select name="washType" id="washType" onChange={washTypeChangeHandler}>
               <option value="">-----</option>
               <option value="basic">Basic</option>
               <option value="deluxe">Deluxe</option>
@@ -74,7 +101,7 @@ function App() {
         <div>
           <label htmlFor="wash">
             How much do you spend in-store per week? <br />
-            <input type="number" id="sundries" name="location" value={state.numFieldInit} />
+            <input type="number" id="sundries" name="location" value={sundries} onChange={sundriesChangeHandler} />
           </label>
         </div>
 
