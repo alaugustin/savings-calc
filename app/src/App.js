@@ -53,7 +53,7 @@ function App() {
       <h1>Main Page</h1>
 
       <hr />
-      {/* https://reactjs.org/docs/forms.html | https://www.digitalocean.com/community/tutorials/how-to-build-forms-in-react | https://vegibit.com/a-simple-react-js-form-example/*/}
+      {/* https://react-hook-form.com/ | https://reactjs.org/docs/forms.html | https://www.digitalocean.com/community/tutorials/how-to-build-forms-in-react | https://vegibit.com/a-simple-react-js-form-example/*/}
       <form id="mainForm" onSubmit={handleSubmit}>
         <p>Select a province</p>
 
@@ -123,7 +123,7 @@ function App() {
         <button type="submit">Submit</button>
 
         {submitting &&
-          <div>Submtting Form...</div>
+          <div>Submtting Form&hellip;</div>
         }
       </form>
     </div>
