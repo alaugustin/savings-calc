@@ -57,10 +57,6 @@ function App() {
       <form id="mainForm" onSubmit={handleSubmit}>
         <p>Select a province</p>
 
-        {submitting &&
-          <div>Submtting Form...</div>
-        }
-
         <div onChange={locationChangeHandler}>
           <label htmlFor="on"><input type="radio" id="on" name="location" value={"on"} />Ontario</label>
           <label htmlFor="mb"><input type="radio" id="mb" name="location" value={"mb"} />Manitoba</label>
@@ -125,6 +121,10 @@ function App() {
         <Input labelType={"number"} labelId={"sundries"} labelName={"sundries"} labelValue={""} /><br /> */}
 
         <button type="submit">Submit</button>
+
+        {submitting &&
+          <div>Submtting Form...</div>
+        }
       </form>
     </div>
   );
