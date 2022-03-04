@@ -58,8 +58,8 @@ function App() {
         <p>Select a province</p>
 
         <div onChange={locationChangeHandler}>
-          <label htmlFor="on"><input type="radio" id="on" name="location" value={"on"} />Ontario</label>
-          <label htmlFor="mb"><input type="radio" id="mb" name="location" value={"mb"} />Manitoba</label>
+          <label htmlFor="on"><input type="radio" id="on" value="on" name="location" value="on" />Ontario</label>
+          <label htmlFor="mb"><input type="radio" id="mb" value="mb" name="location" value="mb" />Manitoba</label>
         </div>
 
         <div>
