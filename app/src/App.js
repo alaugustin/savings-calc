@@ -23,7 +23,7 @@ function App() {
       <form id="mainForm" onSubmit={handleSubmitMessage}>
         <p>Select a province</p>
 
-        <div>
+        {/* <div>
           <label htmlFor="on"><input type="radio" id="on" value="on" name="location" value="on" />Ontario</label>
           <label htmlFor="mb"><input type="radio" id="mb" value="mb" name="location" value="mb" />Manitoba</label>
         </div>
@@ -59,7 +59,7 @@ function App() {
             How much do you spend in-store per week? <br />
             <input type="number" id="sundries" name="location" value="0" />
           </label>
-        </div>
+        </div> */}
 
         <button type="submit">Submit</button>
 
