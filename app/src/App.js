@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
 import './App.css';
 
 function App() {
-  const [submitting, setSubmitting] = useState(false);
-  const handleSubmit = event => {
+  const [submitForm, setSubmitForm] = useState(false);
+  const handleSubmitMessage = event => {
     event.preventDefault();
-    setSubmitting(true);
+    setSubmitForm(true);
 
     setTimeout(() => {
-      setSubmitting(false);
+      setSubmitForm(false);
 
     }, 3000)
   }
@@ -18,8 +19,8 @@ function App() {
       <h1>Main Page</h1>
 
       <hr />
-      {/* https://react-hook-form.com/ | https://reactjs.org/docs/forms.html | https://www.digitalocean.com/community/tutorials/how-to-build-forms-in-react | https://vegibit.com/a-simple-react-js-form-example/*/}
-      <form id="mainForm" onSubmit={handleSubmit}>
+      {/* https://react-hook-form.com/ */}
+      <form id="mainForm" onSubmit={handleSubmitMessage}>
         <p>Select a province</p>
 
         <div>
@@ -62,7 +63,7 @@ function App() {
 
         <button type="submit">Submit</button>
 
-        {submitting &&
+        {submitForm &&
           <div>Submtting Form&hellip;</div>
         }
       </form>
