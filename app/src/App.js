@@ -12,7 +12,6 @@ function App() {
 
     setTimeout(() => {
       setSubmitting(false);
-      console.log("Form submitted");
 
     }, 3000)
   }
@@ -21,21 +20,18 @@ function App() {
   const locationChangeHandler = (e) => {
     const { value } = e.target;
     setLocation(value);
-    console.log(`${value} location`);
   };
 
   const [gas, setGas] = useState(0);
   const gasChangeHandler = (e) => {
     const { value } = e.target;
     setGas(value);
-    console.log(`${value} gas`);
   };
 
   const [wash, setWash] = useState(0);
   const washChangeHandler = (e) => {
     const { value } = e.target;
     setWash(value);
-    console.log(`${value} wash`);
   };
 
   const [washType, setWashType] = useState("-----");
@@ -43,7 +39,6 @@ function App() {
   const washTypeChangeHandler = (e) => {
     const { value } = e.target;
     setWashType(value);
-    console.log(`${value} washType`);
   };
 
   const [sundries, setSundries] = useState(0);
@@ -51,7 +46,6 @@ function App() {
   const sundriesChangeHandler = (e) => {
     const { value } = e.target;
     setSundries(value);
-    console.log(`${value} sundries`);
   };
 
   return (
