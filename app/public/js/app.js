@@ -1,113 +1,68 @@
-const resultsDiv = document.getElementById("results"),
-  fuelDiscount = 0.03,
-  washDiscount = 0.10,
-  sundriesDiscount = 0.10,
-  fullTankLitres = 55,
+const litresPerWeek = 55,
+  discountPerLitre = 0.03,
+  washesPerWeek = 2,
+  discountOnPurchase = 0.1,
   weeksPerYear = 52;
 
-// data from data.js
-let exchangeRate = currency.rates.CAD,
-  mbGasPriceUs = gasPrice.result[2].gasoline,
-  ratesAsOf = currency.date,
-  onGasPriceUs = gasPrice.result[6].gasoline,
-  ontaxDataRate = onTaxData.applicable,
-  mbTaxDataRate = mbTaxData.applicable,
-  ontaxDataType = onTaxData.type,
-  mbTaxDataType = mbTaxData.type;
+let selectedGasPrice = 1.60,
+  washPrice = 9.99,
+  instorePurchases = 20;
 
-let mbGasPriceCad = mbGasPriceUs * exchangeRate,
-  onGasPriceCad = onGasPriceUs * exchangeRate;
+// ----------
+let getLocation = (locationFlag) => {
 
-// -------------------------
-let savingsCalculator = {
-  version: '1.0',
-  author: '',
-  project: 'Savings Calculator',
-  Date: '2022',
+  switch (locationFlag) {
+    case 'on':
+      console.log("Ontario");
+      return regionalTaxRate = 0.13;
+      break;
 
-  // -------------------- INITIALIZATION --------------------
-  init: function () {
-    let context = this;
+    case 'mb':
+      console.log("Manitoba");
+      return regionalTaxRate = 0.12;
+      break;
 
-    // GLOBAL VARIABLES --------------------
-    context.config = {
-      // let
-      resultsDiv: document.getElementById("results"),
-      fuelDiscount: 0.03,
-      washDiscount: 0.10,
-      sundriesDiscount: 0.10,
-      fullTankLitres: 55,
-      weeksPerYear: 52,
-      // exchangeRate: exchangeRate,
-      // exchangeRateDate: ratesAsOf,
-      // userLocation: userData.location,
-      // numberOfTanks: userData.gas,
-      // numberOfWash: userData.wash,
-      // washType: userData.washType,
-      // sundries: userData.sundries,
-      // weeksPerYear: weeksPerYear,
-      // fullTankLitres: fullTankLitres,
-      // fuelDiscount: fuelDiscount,
-      // washDiscount: washDiscount,
-      // sundriesDiscount: sundriesDiscount,
-      location: {
-        on: {
-          taxRate: ontaxDataRate,
-          taxType: ontaxDataType,
-          GasPriceCad: onGasPriceCad,
-          carWash: {
-            basic: {
-              price: 9.99,
-            },
-            deluxe: {
-              price: 11.99,
-            },
-            ultimate: {
-              price: 13.99,
-            },
-          },
-        },
-        mb: {
-          taxRate: mbTaxDataRate,
-          taxType: mbTaxDataType,
-          GasPriceCad: mbGasPriceCad,
-          carWash: {
-            basic: {
-              price: 7.99,
-            },
-            deluxe: {
-              price: 9.99,
-            },
-            ultimate: {
-              price: 11.99,
-            },
-          },
-        },
-      },
-    };
+    default:
+      break;
+  }
+}
+getLocation("mb");
 
-    // CALL DOM INVOKING FUNCTIONS HERE --------------------
-    savingsCalculator.onDomReady();
-    savingsCalculator.eventHandlers();
-    console.log(savingsCalculator.config);
-  },
+// ----------
+let fuelDiscountPerYear = () => {
+  let fuelCostPerYear = (litresPerWeek * selectedGasPrice) * weeksPerYear;
+  let fuelDiscountPerYear = (litresPerWeek * discountPerLitre) * weeksPerYear;
+  let fuelDiscount = fuelCostPerYear - fuelDiscountPerYear
 
-  onDomReady: () => {
-    console.log("Works");
+  console.log(`1️⃣ Fuel cost per year: ${fuelCostPerYear}`);
+  console.log(`2️⃣ Fuel yearly discount amount: ${fuelDiscountPerYear}`);
+  console.log(`3️⃣ Fuel cost after discount per year: ${fuelDiscount.toFixed(2)}`);
+  console.log(`// ----------`);
+}
+fuelDiscountPerYear();
 
-    // ----- hideShowWash.js
-    hideShowWashType(0)
-  },
+// ----------
+let washDiscountPerYear = () => {
+  let washWithTax = (washesPerWeek * washPrice) * (1 + regionalTaxRate);
+  let washCostPerYear = washWithTax * weeksPerYear;
+  let washDiscount = washCostPerYear - (washCostPerYear * (discountOnPurchase));
 
-  // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
-  eventHandlers: () => {
+  console.log(`1️⃣ Car wash per week with tax: ${washWithTax}`);
+  console.log(`2️⃣ Car wash per year: ${Number(washCostPerYear.toFixed(2))}`);
+  console.log(`3️⃣ Car wash per year after discount: ${Number(washDiscount.toFixed(2))}`);
+  console.log(`// ----------`);
+}
+washDiscountPerYear();
 
-    const form = document.querySelector("form");
-    form.addEventListener("submit", handleSubmit);
-  },
+// ----------
+let instoreDiscountPerYear = () => {
+  let instorePerWeek = instorePurchases * (1 + regionalTaxRate);
+  let instoreCostPerYear = instorePerWeek * weeksPerYear;
+  let instoreDiscount = instoreCostPerYear - instoreCostPerYear * discountOnPurchase;
+
+  console.log(`1️⃣ In store cost per week: ${instorePerWeek}`);
+  console.log(`2️⃣ In store cost per year: ${Number(instoreCostPerYear.toFixed(2))}`);
+  console.log(`3️⃣ In store cost per year after discount: ${Number(instoreDiscount.toFixed(2))}`);
+  console.log(`// ----------`);
 };
-
-// -------------------- LOAD init() --------------------
-window.addEventListener("load", () => {
-  savingsCalculator.init();
-});
+instoreDiscountPerYear();
