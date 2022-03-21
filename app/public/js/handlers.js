@@ -54,9 +54,9 @@ let handleSubmit = (event) => {
   };
 
   hideShowWashType(appData.numberOfWash);
-  
+
   calculateTax(
-    appData.userLocation,     
+    appData.userLocation,
     appData.userLocation === "on"
       ? appData.location.on.taxRate
       : appData.location.mb.taxRate
