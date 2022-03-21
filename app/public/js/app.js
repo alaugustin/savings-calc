@@ -2,8 +2,7 @@ const resultsDiv = document.getElementById("results"),
   fuelDiscount = 0.03,
   washDiscount = 0.10,
   sundriesDiscount = 0.10,
-  fullTankLitres = 55,
-  weeksPerYear = 52;
+  fullTankLitres = 55;
 
 // data from data.js
 let exchangeRate = currency.rates.CAD,
