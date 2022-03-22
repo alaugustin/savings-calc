@@ -24,10 +24,9 @@ let instoreDiscountPerYear = (userInstorePerWeek, userTaxRate) => {
   console.log(`// ----------`);
 };
 
-let resultsDisplay = (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType, purchaseDiscount) => {
+let resultsDisplay = (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
 
   fuelDiscountPerYear(numberOfTanks, gasPriceCadFixed);
-
 
   instoreDiscountPerYear(sundries, taxRate);
 
@@ -36,7 +35,7 @@ let resultsDisplay = (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear,
     <h2>Example of yearly savings	</h2>
     <p>Location: ${locationFlag}</p>
     <p>Tax rate: ${taxRate}${taxType}</p>
-    <p>Wash discount: and In-store discont: ${cleanData.purchaseDiscount}</p>
+    <p>Wash and In-store discont: ${cleanData.purchaseDiscount}</p>
     <hr>
     <p>How many car washes per week do you purchase along with gas?: ${numberOfWash}</p>
     <p>What type of car wash do you purchase?: ${washType}</p>
