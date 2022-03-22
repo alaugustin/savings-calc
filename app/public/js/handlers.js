@@ -82,5 +82,5 @@ let handleSubmit = (event) => {
     appData.sundriesDiscount
   );
 
-  console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
+  // console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
 }
