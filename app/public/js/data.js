@@ -1,28 +1,28 @@
 // API ENDPOINTS FOR TAX
 // https://api.salestaxapi.ca/v2/province/ON
-const onTaxData = { 
+const onTaxData = {
   "start": "2008-01-01 00:00:00",
-  "type": "hst", 
-  "pst": 0.08, 
-  "hst": 0.13, 
-  "gst": 0.05, 
-  "applicable": 0.13, 
-  "source": "Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Sales_taxes_in_Canada), accessed May 31 2019.", 
-  "updated_at": "2019-05-31T14:57:21.000000Z", 
-  "incoming_changes": false 
+  "type": "hst",
+  "pst": 0.08,
+  "hst": 0.13,
+  "gst": 0.05,
+  "applicable": 0.13,
+  "source": "Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Sales_taxes_in_Canada), accessed May 31 2019.",
+  "updated_at": "2019-05-31T14:57:21.000000Z",
+  "incoming_changes": false
 }
 
 // https://api.salestaxapi.ca/v2/province/MB
-const mbTaxData = { 
-  "start": "2019-07-01 00:00:00", 
-  "type": "gst,pst", 
-  "pst": 0.07, 
-  "hst": 0, 
-  "gst": 0.05, 
-  "applicable": 0.12, 
-  "source": "Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Sales_taxes_in_Canada), accessed May 31 2019.", 
-  "updated_at": "2019-05-31T14:58:06.000000Z", 
-  "incoming_changes": false 
+const mbTaxData = {
+  "start": "2019-07-01 00:00:00",
+  "type": "gst,pst",
+  "pst": 0.07,
+  "hst": 0,
+  "gst": 0.05,
+  "applicable": 0.12,
+  "source": "Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Sales_taxes_in_Canada), accessed May 31 2019.",
+  "updated_at": "2019-05-31T14:58:06.000000Z",
+  "incoming_changes": false
 }
 //----------
 
@@ -96,4 +96,4 @@ let currency = {
      "EUR": 0.806942,
      "GBP": 0.719154,
   }
-};   
+};
