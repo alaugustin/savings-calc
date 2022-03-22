@@ -1,8 +1,4 @@
-const resultsDiv = document.getElementById("results"),
-  fuelDiscount = 0.03,
-  purchaseDiscount = 0.10,
-  fullTankPerWeek = 55,
-  weeksPerYear = 52;
+const resultsDiv = document.getElementById("results");
 
 // data from data.js
 let exchangeRate = currency.rates.CAD,

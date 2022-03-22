@@ -1,3 +1,8 @@
+const fuelDiscount = 0.03,
+  purchaseDiscount = 0.10,
+  fullTankPerWeek = 55,
+  weeksPerYear = 52;
+
 // API ENDPOINTS FOR TAX
 // https://api.salestaxapi.ca/v2/province/ON
 const onTaxData = {
