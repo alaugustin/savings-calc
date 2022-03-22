@@ -5,10 +5,10 @@ let exchangeRate = currency.rates.CAD,
   mbGasPriceUs = gasPrice.result[2].gasoline,
   ratesAsOf = currency.date,
   onGasPriceUs = gasPrice.result[6].gasoline,
-  ontaxDataRate = onTaxData.applicable,
-  mbTaxDataRate = mbTaxData.applicable,
-  ontaxDataType = onTaxData.type,
-  mbTaxDataType = mbTaxData.type;
+  ontaxDataRate = cleanData.taxData.on.applicable,
+  mbTaxDataRate = cleanData.taxData.mb.applicable,
+  ontaxDataType = cleanData.taxData.on.type,
+  mbTaxDataType = cleanData.taxData.mb.type;
 
 let mbGasPriceCad = mbGasPriceUs * exchangeRate,
   onGasPriceCad = onGasPriceUs * exchangeRate;

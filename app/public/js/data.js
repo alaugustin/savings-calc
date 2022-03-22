@@ -1,6 +1,6 @@
 // API ENDPOINTS FOR TAX
 // https://api.salestaxapi.ca/v2/province/ON
-const onTaxData = {
+const onTaxDataApi = {
   "start": "2008-01-01 00:00:00",
   "type": "hst",
   "pst": 0.08,
@@ -13,7 +13,7 @@ const onTaxData = {
 }
 
 // https://api.salestaxapi.ca/v2/province/MB
-const mbTaxData = {
+const mbTaxDataApi = {
   "start": "2019-07-01 00:00:00",
   "type": "gst,pst",
   "pst": 0.07,
@@ -99,10 +99,16 @@ let currency = {
 };
 
 const cleanData = {
-  fuelDiscount: 0.03,
-  purchaseDiscount: 0.10,
-  fullTankPerWeek: 55,
-  weeksPerYear: 52
+  "fuelDiscount": 0.03,
+  "purchaseDiscount": 0.10,
+  "fullTankPerWeek": 55,
+  "weeksPerYear": 52,
+  "taxData": {
+    "on": onTaxDataApi,
+    "mb": mbTaxDataApi
+  }
 };
-console.log(cleanData);
-console.log(cleanData.fullTankPerWeek);
+
+console.log(onTaxDataApi);
+console.log(mbTaxDataApi);
+console.log(cleanData.taxData.on.applicable);
