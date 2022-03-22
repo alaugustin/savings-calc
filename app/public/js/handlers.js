@@ -12,9 +12,9 @@ let handleSubmit = (event) => {
     numberOfWash: userData.wash,
     washType: userData.washType,
     sundries: userData.sundries,
-    weeksPerYear: weeksPerYear,
-    fullTankPerWeek: fullTankPerWeek,
-    purchaseDiscount: purchaseDiscount,
+    weeksPerYear: cleanData.weeksPerYear,
+    fullTankPerWeek: cleanData.fullTankPerWeek,
+    purchaseDiscount: cleanData.purchaseDiscount,
     location: {
       on: {
         taxRate: ontaxDataRate,
@@ -63,8 +63,8 @@ let handleSubmit = (event) => {
   resultsDisplay(
     appData.userLocation,
     appData.fullTankPerWeek,
-    appData.fuelDiscount,
-    appData.weeksPerYear,
+    cleanData.fuelDiscount,
+    cleanData.weeksPerYear,
     appData.numberOfTanks,
     appData.userLocation === "on"
       ? appData.location.on.GasPriceCad.toFixed(2)
