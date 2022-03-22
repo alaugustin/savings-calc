@@ -29,7 +29,7 @@ const mbTaxDataApi = {
 
 
 // https://rapidapi.com/collectapi/api/gas-price/
-let gasPrice = {
+let gasPriceApi = {
   success: true,
   result: [
     {
@@ -87,7 +87,7 @@ let gasPrice = {
 
 // https://fixer.io/
 const USD = "USD";
-let currency = {
+let currencyApi = {
   "base": USD,
   "date": "2018-02-13",
   "rates": {
@@ -106,9 +106,7 @@ const cleanData = {
   "taxData": {
     "on": onTaxDataApi,
     "mb": mbTaxDataApi
-  }
+  },
+  "gasData": gasPriceApi,
+  "exchangeData": currencyApi
 };
-
-console.log(onTaxDataApi);
-console.log(mbTaxDataApi);
-console.log(cleanData.taxData.on.applicable);
