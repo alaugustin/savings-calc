@@ -13,7 +13,7 @@ let handleSubmit = (event) => {
     washType: userData.washType,
     sundries: userData.sundries,
     weeksPerYear: weeksPerYear,
-    fullTankLitres: fullTankLitres,
+    fullTankPerWeek: fullTankPerWeek,
     fuelDiscount: fuelDiscount,
     washDiscount: washDiscount,
     sundriesDiscount: sundriesDiscount,
@@ -64,7 +64,7 @@ let handleSubmit = (event) => {
 
   resultsDisplay(
     appData.userLocation,
-    appData.fullTankLitres,
+    appData.fullTankPerWeek,
     appData.fuelDiscount,
     appData.weeksPerYear,
     appData.numberOfTanks,
