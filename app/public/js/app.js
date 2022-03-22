@@ -1,7 +1,6 @@
 const resultsDiv = document.getElementById("results"),
   fuelDiscount = 0.03,
-  washDiscount = 0.10,
-  sundriesDiscount = 0.10,
+  purchaseDiscount = 0.10,
   fullTankPerWeek = 55,
   weeksPerYear = 52;
 

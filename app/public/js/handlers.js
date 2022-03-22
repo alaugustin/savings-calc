@@ -14,9 +14,7 @@ let handleSubmit = (event) => {
     sundries: userData.sundries,
     weeksPerYear: weeksPerYear,
     fullTankPerWeek: fullTankPerWeek,
-    fuelDiscount: fuelDiscount,
-    washDiscount: washDiscount,
-    sundriesDiscount: sundriesDiscount,
+    purchaseDiscount: purchaseDiscount,
     location: {
       on: {
         taxRate: ontaxDataRate,
