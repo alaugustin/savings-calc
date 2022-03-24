@@ -1,38 +1,9 @@
-const data = [
-  {
-    name: "Ontario",
-    taxRate: 0.13,
-    taxType: "HST",
-    gas: {
-      price: 1.50,
-    },
-    wash: {
-      aaa: "wash on aaa",
-      bbb: "wash on bbb",
-      ccc: "wash on ccc",
-    }
-  },
-  {
-    name: "Manitoba",
-    taxRate: 0.12,
-    taxType: "GST+PST",
-    gas: {
-      price: 1.75,
-    },
-    wash: {
-      aaa: "wash mb xxx",
-      bbb: "wash mb yyy",
-      ccc: "wash mb zzz",
-    }
-  },
-];
-
 const locationOn = "on",
   locationMb = "mb",
-  onData = data[0],
-  mbData = data[1],
-  taxRateOn = onData.taxRate,
-  taxRateMb = mbData.taxRate,
+  onData = cleanData.taxData.on,
+  mbData = cleanData.taxData.mb,
+  taxRateOn = onData.applicable,
+  taxRateMb = mbData.applicable,
   taxTypeOn = onData.taxType,
   taxTypeMb = mbData.taxType,
   gasOn = onData.gas,
@@ -40,11 +11,6 @@ const locationOn = "on",
   washOn = onData.wash,
   washMb = mbData.wash,
   discountAmount = 0.05;
-
-// console.log(gasOn);
-// console.log(washOn);
-// console.log(gasMb);
-// console.log(washMb);
 
 let saleItemAmount = 100,
   locationFlag,
