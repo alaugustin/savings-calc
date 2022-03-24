@@ -76,9 +76,4 @@ const calculateTax = (location, taxRate) => {
       console.log(`Error`);
       return;
   }
-
-  // console.log(
-  //   `Total purchase price in ${locationFlag} is $${totalPurchasePrice} ||||| Tax after discount is: $${taxAfterDiscount} at a rate of ${taxRate * 100
-  //   }% ${taxType}`
-  // );
 };
