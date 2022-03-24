@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { 
+  res.render('index', {
     title: 'Savings Calcuator',
     selectProvinceLabel: 'Select a province',
     provinceList: [
@@ -20,10 +20,6 @@ router.get('/', function(req, res, next) {
     washLable: 'How many car washes per week do you purchase along with gas?',
     washTypeLable: 'What type of car wash do you purchase?',
     washList: [
-      {
-        name: "-----",
-        washType: ""
-      },
       {
         name: "Basic",
         washType: "basic"
