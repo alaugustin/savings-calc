@@ -1,4 +1,5 @@
-const resultsDiv = document.getElementById("results"),
+const mainForm = document.getElementById("mainForm"),
+  resultsDiv = document.getElementById("results"),
   cleanGasData = cleanData.gasData,
   cleanExchangeData = cleanData.exchangeData,
   cleanTaxData = cleanData.taxData;
@@ -16,8 +17,9 @@ let exchangeRate = cleanExchangeData.rates.CAD,
 let mbGasPriceCad = mbGasPriceUs * exchangeRate,
   onGasPriceCad = onGasPriceUs * exchangeRate;
 
-// ----- hideShowWash.js
-hideShowWashType(0)
+// ----- hideShowElements.js
+hideShowWashType();
+resultsCollection.style.display = "none";
 
 // -----
 const form = document.querySelector("form");

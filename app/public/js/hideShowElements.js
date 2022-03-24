@@ -18,9 +18,11 @@ let hideShowWashType = () => {
   });
 }
 
-let hideShowResultsDiv = (flag) => {
+let hideFormShowResults = () => {
+  resultsCollection.style.display = "block";
+  mainForm.style.display = "none";
 
-  (flag = 0) ? console.log("false") : console.log("true");
+  console.log("works");
 
 
 
