@@ -6,15 +6,15 @@
   <p>{{selectProvinceLabel}}</p>
 
   {{#each provinceList}}
-    <input type="radio" id="{{this.locationFlag}}" name="location" value="{{this.locationFlag}}">
+    <input type="radio" id="{{this.locationFlag}}" name="location" value="{{this.locationFlag}}" required>
     <label for="{{this.locationFlag}}">{{this.name}}</label><br>
   {{/each}}
 
   <label for="gas">{{gasTankLabel}}</label><br>
-  <input type="number" id="gas" name="gas"><br>
+  <input type="number" id="gas" name="gas" placeholder="0" required><br>
 
   <label for="wash">{{washLable}}</label><br>
-  <input type="number" id="wash" name="wash"><br>
+  <input type="number" id="wash" name="wash" placeholder="0" required><br>
 
   <!-- CONDITIONALLY SHOW IF # OF WASHES IS GREATER THAN 1 -->
   <div id="washTypeHolder">
@@ -27,7 +27,7 @@
   </div>
 
   <label for="sundries">{{sundriesLabel}}</label><br>
-  <input type="number" id="sundries" name="sundries"><br>
+  <input type="number" step=".01" id="sundries" name="sundries" placeholder="0.00" required><br>
 
   <button type="submit">Submit</button>
 </form>
