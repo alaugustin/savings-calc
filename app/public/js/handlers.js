@@ -15,40 +15,6 @@ let handleSubmit = (event) => {
     weeksPerYear: cleanData.weeksPerYear,
     fullTankPerWeek: cleanData.fullTankPerWeek,
     purchaseDiscount: cleanData.purchaseDiscount,
-    location: {
-      on: {
-        taxRate: ontaxDataRate,
-        taxType: ontaxDataType,
-        GasPriceCad: onGasPriceCad,
-        carWash: {
-          basic: {
-            price: 9.99,
-          },
-          deluxe: {
-            price: 11.99,
-          },
-          ultimate: {
-            price: 13.99,
-          },
-        },
-      },
-      mb: {
-        taxRate: mbTaxDataRate,
-        taxType: mbTaxDataType,
-        GasPriceCad: mbGasPriceCad,
-        carWash: {
-          basic: {
-            price: 7.99,
-          },
-          deluxe: {
-            price: 9.99,
-          },
-          ultimate: {
-            price: 11.99,
-          },
-        },
-      },
-    },
   };
 
   hideShowWashType(appData.numberOfWash);
@@ -57,8 +23,8 @@ let handleSubmit = (event) => {
   calculateTax(
     appData.userLocation,
     appData.userLocation === "on"
-      ? appData.location.on.taxRate
-      : appData.location.mb.taxRate
+      ? cleanData.taxData.on.applicable
+      : cleanData.taxData.mb.applicable
   );
 
   resultsDisplay(
@@ -68,20 +34,18 @@ let handleSubmit = (event) => {
     cleanData.weeksPerYear,
     appData.numberOfTanks,
     appData.userLocation === "on"
-      ? appData.location.on.GasPriceCad.toFixed(2)
-      : appData.location.mb.GasPriceCad.toFixed(2),
+      ? cleanData.gasData.result[6].gasoline
+      : cleanData.gasData.result[2].gasoline,
     appData.numberOfWash,
     appData.washType,
     appData.sundries,
     appData.userLocation === "on"
-      ? appData.location.on.taxRate
-      : appData.location.mb.taxRate,
+      ? cleanData.taxData.on.applicable
+      : cleanData.taxData.mb.applicable,
     appData.userLocation === "on"
-      ? appData.location.on.taxType
-      : appData.location.mb.taxType,
+      ? cleanData.taxData.on.type
+      : cleanData.taxData.mb.type,
     appData.washDiscount,
     appData.sundriesDiscount
   );
-
-  // console.log(`Exchange rate as of ${appData.exchangeRateDate}`);
 }
