@@ -19,6 +19,7 @@ let handleSubmit = (event) => {
 
   hideShowWashType(appData.numberOfWash);
   hideFormShowResults();
+  getUserWashPrice(appData.washType);
 
   calculateTax(
     appData.userLocation,

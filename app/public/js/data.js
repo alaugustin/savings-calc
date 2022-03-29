@@ -98,6 +98,12 @@ let currencyApi = {
   }
 };
 
+const washPrice = {
+  "basic": 9.99,
+  "deluxe": 11.99,
+  "ultimate": 13.99,
+};
+
 const cleanData = {
   "fuelDiscount": 0.03,
   "purchaseDiscount": 0.10,
@@ -108,5 +114,6 @@ const cleanData = {
     "mb": mbTaxDataApi
   },
   "gasData": gasPriceApi,
-  "exchangeData": currencyApi
+  "exchangeData": currencyApi,
+  "washData": washPrice
 };

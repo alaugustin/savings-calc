@@ -1,3 +1,24 @@
+let setUserWashPrice;
+const getUserWashPrice = (selectedWashType) => {
+  switch (selectedWashType) {
+    case 'basic':
+      setUserWashPrice = 9.99;
+
+      break;
+    case 'deluxe':
+      setUserWashPrice = 11.99;
+
+      break;
+    case 'ultimate':
+      setUserWashPrice = 13.99;
+
+      break;
+
+    default:
+      break;
+  }
+}
+
 const gasResult = document.getElementById("gasResult"),
   washResult = document.getElementById("washResult"),
   sundriesResult = document.getElementById("sundriesResult");
@@ -22,7 +43,8 @@ let fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
 }
 
 // 🚨 TODO: CONSTRUCT DATA FOR userSelectedWashPrice
-let washDiscountPerYear = (userSelectedWashesPerWeek, userSelectedWashPrice, userTaxRate) => {
+let washDiscountPerYear = (userSelectedWashesPerWeek, userSelectedWashType, userTaxRate) => {
+  let userSelectedWashPrice = setUserWashPrice;
   let washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
   let washCostPerYear = washWithTax * cleanData.weeksPerYear;
   let washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
@@ -30,9 +52,9 @@ let washDiscountPerYear = (userSelectedWashesPerWeek, userSelectedWashPrice, use
   washResult.innerHTML = ``;
   washResult.innerHTML = `
     <p>User purchases ${userSelectedWashesPerWeek} car washes per week</p>
-    <p>User selected wash price is: ${userSelectedWashPrice}</p>
+    <p>User selected wash price is: $${userSelectedWashPrice}</p>
     <p>User's regional tax rate is: ${userTaxRate * 100}%</p>
-    <p>One week of car washes with tax is: ${washWithTax.toFixed(2)}</p>
+    <p>One week of car washes with tax is: $${washWithTax.toFixed(2)}</p>
     <p>User buys $${washCostPerYear.toFixed(2)} in washes a year</p>
     <p>User saves a total of $${(washCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
     <p>After discount user spends a total of $${washDiscount.toFixed(2)} in car washes a year</p>
@@ -61,7 +83,7 @@ let resultsDisplay = (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear,
 
   fuelDiscountPerYear(numberOfTanks, gasPriceCadFixed);
 
-  washDiscountPerYear(numberOfWash, 10.00, taxRate);
+  washDiscountPerYear(numberOfWash, washType, taxRate);
 
   instoreDiscountPerYear(sundries, taxRate);
-}
+};
