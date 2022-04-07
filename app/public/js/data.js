@@ -30,7 +30,7 @@ const options = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Host': 'gas-price.p.rapidapi.com',
-    'X-RapidAPI-Key': 'c64be2a0d1mshbc708383884d6c9p177ad8jsna5138ce75cbd'
+    'X-RapidAPI-Key': '<enter key here>'
   }
 };
 
