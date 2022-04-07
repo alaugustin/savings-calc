@@ -23,7 +23,7 @@ let hideFormShowResults = () => {
   mainForm.style.display = "none";
 }
 
-let showFormHideResults = (e) => {
+let showFormHideResults = () => {
   resultsCollection.style.display = "none";
   mainForm.style.display = "block";
   washTypeHolderDiv.style.display = "block";

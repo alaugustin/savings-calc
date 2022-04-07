@@ -12,7 +12,7 @@ const locationOn = "on",
   washMb = mbData.wash,
   discountAmount = 0.05;
 
-let saleItemAmount = 100,
+let saleItemAmount,
   locationFlag,
   taxRate,
   taxType,

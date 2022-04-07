@@ -26,7 +26,18 @@ const mbTaxDataApi = {
 }
 //----------
 
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Host': 'gas-price.p.rapidapi.com',
+    'X-RapidAPI-Key': 'c64be2a0d1mshbc708383884d6c9p177ad8jsna5138ce75cbd'
+  }
+};
 
+fetch('https://gas-price.p.rapidapi.com/canada', options)
+  .then(response => response.json())
+  .then(response => console.log(response.result))
+  .catch(err => console.error(err));
 
 // https://rapidapi.com/collectapi/api/gas-price/
 let gasPriceApi = {
