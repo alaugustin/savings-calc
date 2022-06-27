@@ -10,10 +10,8 @@ const onTaxDataApi = {
   "source": "Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Sales_taxes_in_Canada), accessed May 31 2019.",
   "updated_at": "2019-05-31T14:57:21.000000Z",
   "incoming_changes": false
-}
-
-// https://api.salestaxapi.ca/v2/province/MB
-const mbTaxDataApi = {
+},
+mbTaxDataApi = { // https://api.salestaxapi.ca/v2/province/MB
   "start": "2019-07-01 00:00:00",
   "type": "gst,pst",
   "pst": 0.07,
@@ -23,10 +21,8 @@ const mbTaxDataApi = {
   "source": "Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Sales_taxes_in_Canada), accessed May 31 2019.",
   "updated_at": "2019-05-31T14:58:06.000000Z",
   "incoming_changes": false
-}
-//----------
-
-const options = {
+},
+options = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Host': 'gas-price.p.rapidapi.com',
@@ -40,7 +36,7 @@ fetch('https://gas-price.p.rapidapi.com/canada', options)
   .catch(err => console.error(err));
 
 // https://rapidapi.com/collectapi/api/gas-price/
-let gasPriceApi = {
+const gasPriceApi = {
   success: true,
   result: [
     {
@@ -94,11 +90,9 @@ let gasPriceApi = {
       "gasoline": "1.70",
     },
   ],
-};
-
-// https://fixer.io/
-const USD = "USD";
-let currencyApi = {
+},
+USD = "USD",
+currencyApi = { // https://fixer.io/
   "base": USD,
   "date": "2018-02-13",
   "rates": {
@@ -107,15 +101,13 @@ let currencyApi = {
      "EUR": 0.806942,
      "GBP": 0.719154,
   }
-};
-
-const washPrice = {
+},
+washPrice = {
   "basic": 9.99,
   "deluxe": 11.99,
   "ultimate": 13.99,
-};
-
-const cleanData = {
+},
+cleanData = {
   "fuelDiscount": 0.03,
   "purchaseDiscount": 0.10,
   "fullTankPerWeek": 55,
