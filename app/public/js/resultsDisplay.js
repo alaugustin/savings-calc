@@ -24,9 +24,9 @@ const gasResult = document.getElementById("gasResult"),
   sundriesResult = document.getElementById("sundriesResult");
 
 let fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
-  let fuelCostPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * userSelectedGasPrice) * cleanData.weeksPerYear;
-  let fuelDiscountPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * cleanData.fuelDiscount) * cleanData.weeksPerYear;
-  let fuelSavingsPerYear = fuelCostPerYear - fuelDiscountPerYear;
+  let fuelCostPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * userSelectedGasPrice) * cleanData.weeksPerYear,
+    fuelDiscountPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * cleanData.fuelDiscount) * cleanData.weeksPerYear,
+    fuelSavingsPerYear = fuelCostPerYear - fuelDiscountPerYear;
 
   gasResult.innerHTML = ``;
   gasResult.innerHTML = `
@@ -43,11 +43,11 @@ let fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
 }
 
 // 🚨 TODO: CONSTRUCT DATA FOR userSelectedWashPrice
-let washDiscountPerYear = (userSelectedWashesPerWeek, userSelectedWashType, userTaxRate) => {
-  let userSelectedWashPrice = setUserWashPrice;
-  let washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
-  let washCostPerYear = washWithTax * cleanData.weeksPerYear;
-  let washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
+let washDiscountPerYear = (userSelectedWashesPerWeek, userTaxRate) => {
+  let userSelectedWashPrice = setUserWashPrice,
+    washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate),
+    washCostPerYear = washWithTax * cleanData.weeksPerYear,
+    washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
 
   washResult.innerHTML = ``;
   washResult.innerHTML = `
@@ -63,9 +63,9 @@ let washDiscountPerYear = (userSelectedWashesPerWeek, userSelectedWashType, user
 }
 
 let instoreDiscountPerYear = (userInstorePerWeek, userTaxRate) => {
-  let instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate);
-  let instoreCostPerYear = instorePerWeekWitTax * cleanData.weeksPerYear;
-  let instoreDiscount = instoreCostPerYear - (instoreCostPerYear * cleanData.purchaseDiscount);
+  let instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate),
+    instoreCostPerYear = instorePerWeekWitTax * cleanData.weeksPerYear,
+    instoreDiscount = instoreCostPerYear - (instoreCostPerYear * cleanData.purchaseDiscount);
 
   sundriesResult.innerHTML = ``;
   sundriesResult.innerHTML = `
