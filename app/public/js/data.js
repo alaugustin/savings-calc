@@ -28,15 +28,8 @@ options = {
     'X-RapidAPI-Host': 'gas-price.p.rapidapi.com',
     'X-RapidAPI-Key': '<enter key here>'
   }
-};
-
-fetch('https://gas-price.p.rapidapi.com/canada', options)
-  .then(response => response.json())
-  .then(response => console.log(response.result))
-  .catch(err => console.error(err));
-
-// https://rapidapi.com/collectapi/api/gas-price/
-const gasPriceApi = {
+},
+gasPriceApi = { // https://rapidapi.com/collectapi/api/gas-price/
   success: true,
   result: [
     {
@@ -120,3 +113,8 @@ cleanData = {
   "exchangeData": currencyApi,
   "washData": washPrice
 };
+
+fetch('https://gas-price.p.rapidapi.com/canada', options)
+  .then(response => response.json())
+  .then(response => console.log(response.result))
+  .catch(err => console.error(err));

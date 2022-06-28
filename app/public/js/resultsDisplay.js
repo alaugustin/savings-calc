@@ -1,17 +1,21 @@
+const gasResult = document.getElementById("gasResult"),
+  washResult = document.getElementById("washResult"),
+  sundriesResult = document.getElementById("sundriesResult");
+
 let setUserWashPrice;
+
 const getUserWashPrice = (selectedWashType) => {
   switch (selectedWashType) {
     case 'basic':
       setUserWashPrice = 9.99;
-
       break;
+
     case 'deluxe':
       setUserWashPrice = 11.99;
-
       break;
+
     case 'ultimate':
       setUserWashPrice = 13.99;
-
       break;
 
     default:
@@ -19,11 +23,7 @@ const getUserWashPrice = (selectedWashType) => {
   }
 }
 
-const gasResult = document.getElementById("gasResult"),
-  washResult = document.getElementById("washResult"),
-  sundriesResult = document.getElementById("sundriesResult");
-
-let fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
+const fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
   let fuelCostPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * userSelectedGasPrice) * cleanData.weeksPerYear,
     fuelDiscountPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * cleanData.fuelDiscount) * cleanData.weeksPerYear,
     fuelSavingsPerYear = fuelCostPerYear - fuelDiscountPerYear;
@@ -43,7 +43,7 @@ let fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
 }
 
 // 🚨 TODO: CONSTRUCT DATA FOR userSelectedWashPrice
-let washDiscountPerYear = (userSelectedWashesPerWeek, userTaxRate) => {
+const washDiscountPerYear = (userSelectedWashesPerWeek, userTaxRate) => {
   let userSelectedWashPrice = setUserWashPrice,
     washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate),
     washCostPerYear = washWithTax * cleanData.weeksPerYear,
@@ -62,7 +62,7 @@ let washDiscountPerYear = (userSelectedWashesPerWeek, userTaxRate) => {
   `;
 }
 
-let instoreDiscountPerYear = (userInstorePerWeek, userTaxRate) => {
+const instoreDiscountPerYear = (userInstorePerWeek, userTaxRate) => {
   let instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate),
     instoreCostPerYear = instorePerWeekWitTax * cleanData.weeksPerYear,
     instoreDiscount = instoreCostPerYear - (instoreCostPerYear * cleanData.purchaseDiscount);
