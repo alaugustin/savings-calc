@@ -21,16 +21,16 @@ router.get('/', function(req, res, next) {
     washTypeLable: 'What type of car wash do you purchase?',
     washList: [
       {
-        name: "Basic",
-        washType: "basic"
+        name: "Bronze",
+        washType: "bronze"
       },
       {
-        name: "Deluxe",
-        washType: "deluxe"
+        name: "Silver",
+        washType: "silver"
       },
       {
-        name: "Ultimate",
-        washType: "ultimate"
+        name: "Gold",
+        washType: "gold"
       }
     ],
     sundriesLabel:'How much do you spend in-store per week?'

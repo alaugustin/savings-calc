@@ -96,9 +96,9 @@ currencyApi = { // https://fixer.io/
   }
 },
 washPrice = {
-  "basic": 9.99,
-  "deluxe": 11.99,
-  "ultimate": 13.99,
+  "bronze": 9.99,
+  "silver": 11.99,
+  "gold": 13.99,
 },
 cleanData = {
   "fuelDiscount": 0.03,
