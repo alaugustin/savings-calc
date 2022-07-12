@@ -37,7 +37,7 @@ const fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) =>
     <p>The standard fuel discount is $${cleanData.fuelDiscount} per litre</p>
     <p>User buys $${fuelCostPerYear.toFixed(2)} in fuel per year</p>
     <p>User saves a total of $${fuelDiscountPerYear.toFixed(2)}</p>
-    <p>Fuel savings $${fuelSavingsPerYear.toFixed(2)} per year after discount</p>
+    <p style="background: yellow">Fuel savings $${fuelSavingsPerYear.toFixed(2)} per year after discount</p>
     <hr />
   `;
 }
@@ -57,7 +57,7 @@ const washDiscountPerYear = (userSelectedWashesPerWeek, userTaxRate) => {
     <p>One week of car washes with tax is: $${washWithTax.toFixed(2)}</p>
     <p>User buys $${washCostPerYear.toFixed(2)} in washes a year</p>
     <p>User saves a total of $${(washCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
-    <p>After discount user spends a total of $${washDiscount.toFixed(2)} in car washes a year</p>
+    <p style="background: yellow">After discount user spends a total of $${washDiscount.toFixed(2)} in car washes a year</p>
     <hr />
   `;
 }
@@ -74,7 +74,7 @@ const instoreDiscountPerYear = (userInstorePerWeek, userTaxRate) => {
     <p>User spends $${instorePerWeekWitTax.toFixed(2)} per week with tax</p>
     <p>User buys $${instoreCostPerYear.toFixed(2)} in store a year</p>
     <p>User saves a total of $${(instoreCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
-    <p>After discount user spends a total of $${instoreDiscount.toFixed(2)} in store a year</p>
+    <p style="background: yellow">After discount user spends a total of $${instoreDiscount.toFixed(2)} in store a year</p>
     <hr />
   `;
 };
