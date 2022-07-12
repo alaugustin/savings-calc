@@ -1,6 +1,4 @@
-const mainForm = document.getElementById("mainForm"),
-  resultsDiv = document.getElementById("results"),
-  cleanGasData = cleanData.gasData,
+const cleanGasData = cleanData.gasData,
   cleanExchangeData = cleanData.exchangeData,
   cleanTaxData = cleanData.taxData,
   exchangeRate = cleanExchangeData.rates.CAD,
@@ -11,17 +9,6 @@ const mainForm = document.getElementById("mainForm"),
   mbTaxDataRate = cleanTaxData.mb.applicable,
   ontaxDataType = cleanTaxData.on.type,
   mbTaxDataType = cleanTaxData.mb.type,
-  mbGasPriceCad = mbGasPriceUs * exchangeRate,
-  onGasPriceCad = onGasPriceUs * exchangeRate,
-  form = document.querySelector("form"),
-  selectElement = document.getElementById("wash"),
-  washTypeHolderDiv = document.getElementById("washTypeHolder"),
-  resultsCollection = document.getElementById("resultsCollection"),
-  gasResult = document.getElementById("gasResult"),
-  washResult = document.getElementById("washResult"),
-  sundriesResult = document.getElementById("sundriesResult"),
-  locationOn = "on",
-  locationMb = "mb",
   onData = cleanData.taxData.on,
   mbData = cleanData.taxData.mb,
   taxRateOn = onData.applicable,
@@ -31,8 +18,7 @@ const mainForm = document.getElementById("mainForm"),
   gasOn = onData.gas,
   gasMb = mbData.gas,
   washOn = onData.wash,
-  washMb = mbData.wash,
-  discountAmount = 0.05;
+  washMb = mbData.wash;
 
 let saleItemAmount,
   locationFlag,
@@ -53,7 +39,21 @@ let app = {
 
     // GLOBAL VARIABLES --------------------
     context.config = {
-      aVar: "lorem"
+      mainForm: document.getElementById("mainForm"),
+      resultsDiv: document.getElementById("results"),
+      mbGasPriceCad: mbGasPriceUs * exchangeRate,
+      onGasPriceCad: onGasPriceUs * exchangeRate,
+      form: document.querySelector("form"),
+      selectElement: document.getElementById("wash"),
+      washTypeHolderDiv: document.getElementById("washTypeHolder"),
+      resultsCollection: document.getElementById("resultsCollection"),
+      gasResult: document.getElementById("gasResult"),
+      washResult: document.getElementById("washResult"),
+      sundriesResult: document.getElementById("sundriesResult"),
+      locationOn: "on",
+      locationMb: "mb",
+      discountAmount: 0.05,
+      cleanData: cleanData,
     };
 
     // CALL DOM INVOKING FUNCTIONS HERE --------------------
@@ -63,20 +63,21 @@ let app = {
 
   onDomReady: () => {
     console.log(`onDomReady()`);
+    console.log(app.config.cleanData);
   },
 
   hideShowWashType: () => {
     const eventTypes = ['change', 'blur', 'keyup'];
 
-    selectElement > 1
-      ? washTypeHolderDiv.style.display = "block"
-      : washTypeHolderDiv.style.display = "none";
+    app.config.selectElement > 1
+      ? app.config.washTypeHolderDiv.style.display = "block"
+      : app.config.washTypeHolderDiv.style.display = "none";
 
     eventTypes.forEach(eventType => {
-      selectElement.addEventListener(eventType, (event) => {
+      app.config.selectElement.addEventListener(eventType, (event) => {
         event.target.value > 0
-          ? washTypeHolderDiv.style.display = "block"
-          : washTypeHolderDiv.style.display = "none";
+          ? app.config.washTypeHolderDiv.style.display = "block"
+          : app.config.washTypeHolderDiv.style.display = "none";
       });
     });
   },
@@ -89,7 +90,7 @@ let app = {
   showFormHideResults: () => {
     resultsCollection.style.display = "none";
     mainForm.style.display = "block";
-    washTypeHolderDiv.style.display = "block";
+    app.config.washTypeHolderDiv.style.display = "block";
   },
 
   fuelDiscountPerYear: (userSelectedNumberOfTanks, userSelectedGasPrice) => {
@@ -112,6 +113,7 @@ let app = {
 
   washDiscountPerYear: (userSelectedWashesPerWeek, washType, userTaxRate) => {
     let washWithTax = (userSelectedWashesPerWeek * washType) * (1 + userTaxRate);
+
     const washData = (washPrice) => {
       userSelectedWashPrice = washPrice
       washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
@@ -170,29 +172,25 @@ let app = {
 
   setTaxData: (location) => {
     switch (location) {
-      case "on":
-        (taxRate = taxRateOn), (taxType = taxTypeOn);
-        break;
-
       case "mb":
         (taxRate = taxRateMb), (taxType = taxTypeMb);
         break;
 
       default:
-        console.log(`Error`);
+        (taxRate = taxRateOn), (taxType = taxTypeOn);
         return;
     }
   },
 
   calcTotalPurchasePrice: (taxAmount) => {
     totalPurchasePrice = (
-      (saleItemAmount / (1 + discountAmount)) * (1 + taxAmount)
+      (saleItemAmount / (1 + app.config.discountAmount)) * (1 + taxAmount)
     ).toFixed(2);
   },
 
   calcTaxAfterDiscount: (taxAmount) => {
     taxAfterDiscount = (
-      (saleItemAmount - saleItemAmount * discountAmount) * taxAmount
+      (saleItemAmount - saleItemAmount * app.config.discountAmount) * taxAmount
     ).toFixed(2);
   },
 
@@ -204,13 +202,6 @@ let app = {
 
   calculateTax: (location, taxRate) => {
     switch (location) {
-      case "on":
-        (locationFlag = location),
-        (locationName = onData.name),
-        (taxRate = taxRate);
-        app.consolodateRequest(location, taxRate);
-        break;
-
       case "mb":
         (locationFlag = location),
         (locationName = mbData.name),
@@ -219,7 +210,10 @@ let app = {
         break;
 
       default:
-        console.log(`Error`);
+        (locationFlag = location),
+        (locationName = onData.name),
+        (taxRate = taxRate);
+        app.consolodateRequest(location, taxRate);
         return;
     }
   },
@@ -281,7 +275,7 @@ let app = {
     console.log(`eventHandlers()`);
     app.hideShowWashType();
     resultsCollection.style.display = "none";
-    form.addEventListener("submit", app.handleSubmit);
+    app.config.form.addEventListener("submit", app.handleSubmit);
   },
 };
 
