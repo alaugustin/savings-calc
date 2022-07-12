@@ -41,59 +41,64 @@ let saleItemAmount,
   locationName,
   setUserWashPrice;
 
-const hideShowWashType = () => {
-  const eventTypes = ['change', 'blur', 'keyup'];
+let app = {
+  version: "1.0",
+  author: "CAASCO Digital Operations",
+  project: "",
+  Date: "2022",
 
-  selectElement > 1
-    ? washTypeHolderDiv.style.display = "block"
-    : washTypeHolderDiv.style.display = "none";
+  // -------------------- INITIALIZATION --------------------
+  init: function () {
+    let context = this;
 
-  eventTypes.forEach(eventType => {
-    selectElement.addEventListener(eventType, (event) => {
-      event.target.value > 0
-        ? washTypeHolderDiv.style.display = "block"
-        : washTypeHolderDiv.style.display = "none";
+    // GLOBAL VARIABLES --------------------
+    context.config = {
+      aVar: "lorem"
+    };
+
+    // CALL DOM INVOKING FUNCTIONS HERE --------------------
+    app.onDomReady();
+    app.eventHandlers();
+  },
+
+  onDomReady: () => {
+    console.log(`onDomReady()`);
+  },
+
+  hideShowWashType: () => {
+    const eventTypes = ['change', 'blur', 'keyup'];
+
+    selectElement > 1
+      ? washTypeHolderDiv.style.display = "block"
+      : washTypeHolderDiv.style.display = "none";
+
+    eventTypes.forEach(eventType => {
+      selectElement.addEventListener(eventType, (event) => {
+        event.target.value > 0
+          ? washTypeHolderDiv.style.display = "block"
+          : washTypeHolderDiv.style.display = "none";
+      });
     });
-  });
-}
+  },
 
-const hideFormShowResults = () => {
-  resultsCollection.style.display = "block";
-  mainForm.style.display = "none";
-}
+  hideFormShowResults: () => {
+    resultsCollection.style.display = "block";
+    mainForm.style.display = "none";
+  },
 
-const showFormHideResults = () => {
-  resultsCollection.style.display = "none";
-  mainForm.style.display = "block";
-  washTypeHolderDiv.style.display = "block";
-}
+  showFormHideResults: () => {
+    resultsCollection.style.display = "none";
+    mainForm.style.display = "block";
+    washTypeHolderDiv.style.display = "block";
+  },
 
-const getUserWashPrice = (selectedWashType) => {
-  switch (selectedWashType) {
-    case 'basic':
-      setUserWashPrice = 9.99;
-      break;
+  fuelDiscountPerYear: (userSelectedNumberOfTanks, userSelectedGasPrice) => {
+    let fuelCostPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * userSelectedGasPrice) * cleanData.weeksPerYear,
+      fuelDiscountPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * cleanData.fuelDiscount) * cleanData.weeksPerYear,
+      fuelSavingsPerYear = fuelCostPerYear - fuelDiscountPerYear;
 
-    case 'deluxe':
-      setUserWashPrice = 11.99;
-      break;
-
-    case 'ultimate':
-      setUserWashPrice = 13.99;
-      break;
-
-    default:
-      break;
-  }
-}
-
-const fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) => {
-  let fuelCostPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * userSelectedGasPrice) * cleanData.weeksPerYear,
-    fuelDiscountPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * cleanData.fuelDiscount) * cleanData.weeksPerYear,
-    fuelSavingsPerYear = fuelCostPerYear - fuelDiscountPerYear;
-
-  gasResult.innerHTML = ``;
-  gasResult.innerHTML = `
+    gasResult.innerHTML = ``;
+    gasResult.innerHTML = `
     <p>Standard full tank of gas per week: ${cleanData.fullTankPerWeek} litres</p>
     <p>User buys ${userSelectedNumberOfTanks} tank(s) of gas a week</p>
     <p>Average gas price for user is: $${userSelectedGasPrice}</p>
@@ -102,35 +107,34 @@ const fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) =>
     <p>User buys $${fuelCostPerYear.toFixed(2)} in fuel per year</p>
     <p>User saves a total of $${fuelDiscountPerYear.toFixed(2)}</p>
     <p style="background: yellow">Fuel savings $${fuelSavingsPerYear.toFixed(2)} per year after discount</p>
-    <hr />
-  `;
-}
+    <hr />`;
+  },
 
-const washDiscountPerYear = (userSelectedWashesPerWeek, washType, userTaxRate) => {
-  let washWithTax = (userSelectedWashesPerWeek * washType) * (1 + userTaxRate);
-  const washData = (washPrice) => {
-    userSelectedWashPrice = washPrice
-    washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
-    washCostPerYear = washWithTax * cleanData.weeksPerYear;
-    washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
-  };
+  washDiscountPerYear: (userSelectedWashesPerWeek, washType, userTaxRate) => {
+    let washWithTax = (userSelectedWashesPerWeek * washType) * (1 + userTaxRate);
+    const washData = (washPrice) => {
+      userSelectedWashPrice = washPrice
+      washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
+      washCostPerYear = washWithTax * cleanData.weeksPerYear;
+      washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
+    };
 
-  switch (washType) {
-    case "silver":
-      washData(washPrice.silver);
-      break;
+    switch (washType) {
+      case "silver":
+        washData(washPrice.silver);
+        break;
 
-    case "gold":
-      washData(washPrice.gold);
-      break;
+      case "gold":
+        washData(washPrice.gold);
+        break;
 
-    default:
-      washData(washPrice.bronze);
-      break;
-  }
+      default:
+        washData(washPrice.bronze);
+        break;
+    }
 
-  washResult.innerHTML = ``;
-  washResult.innerHTML = `
+    washResult.innerHTML = ``;
+    washResult.innerHTML = `
     <p>User purchases ${userSelectedWashesPerWeek} car washe(s) per week</p>
     <p>User selected wash price is: $${userSelectedWashPrice}</p>
     <p>User's regional tax rate is: ${userTaxRate * 100}%</p>
@@ -138,152 +142,150 @@ const washDiscountPerYear = (userSelectedWashesPerWeek, washType, userTaxRate) =
     <p>User buys $${washCostPerYear.toFixed(2)} in washes a year</p>
     <p>User saves a total of $${(washCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
     <p style="background: yellow">After discount user spends a total of $${washDiscount.toFixed(2)} in car washes a year</p>
-    <hr />
-  `;
-}
+    <hr />`;
+  },
 
-const instoreDiscountPerYear = (userInstorePerWeek, userTaxRate) => {
-  const instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate),
-    instoreCostPerYear = instorePerWeekWitTax * cleanData.weeksPerYear,
-    instoreDiscount = instoreCostPerYear - (instoreCostPerYear * cleanData.purchaseDiscount);
+  instoreDiscountPerYear: (userInstorePerWeek, userTaxRate) => {
+    const instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate),
+      instoreCostPerYear = instorePerWeekWitTax * cleanData.weeksPerYear,
+      instoreDiscount = instoreCostPerYear - (instoreCostPerYear * cleanData.purchaseDiscount);
 
-  sundriesResult.innerHTML = ``;
-  sundriesResult.innerHTML = `
+    sundriesResult.innerHTML = ``;
+    sundriesResult.innerHTML = `
     <p>User spends $${userInstorePerWeek} in store per week</p>
     <p>User's regional tax rate is: ${userTaxRate * 100}%</p>
     <p>User spends $${instorePerWeekWitTax.toFixed(2)} per week with tax</p>
     <p>User buys $${instoreCostPerYear.toFixed(2)} in store a year</p>
     <p>User saves a total of $${(instoreCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
     <p style="background: yellow">After discount user spends a total of $${instoreDiscount.toFixed(2)} in store a year</p>
-    <hr />
-  `;
-};
+    <hr />`;
+  },
 
-const resultsDisplay = (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
+  resultsDisplay: (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
 
-  fuelDiscountPerYear(numberOfTanks, gasPriceCadFixed);
+    app.fuelDiscountPerYear(numberOfTanks, gasPriceCadFixed);
+    app.washDiscountPerYear(numberOfWash, washType, taxRate);
+    app.instoreDiscountPerYear(sundries, taxRate);
+  },
 
-  washDiscountPerYear(numberOfWash, washType, taxRate);
+  setTaxData: (location) => {
+    switch (location) {
+      case "on":
+        (taxRate = taxRateOn), (taxType = taxTypeOn);
+        break;
 
-  instoreDiscountPerYear(sundries, taxRate);
-};
+      case "mb":
+        (taxRate = taxRateMb), (taxType = taxTypeMb);
+        break;
 
-const setTaxData = (location) => {
-  switch (location) {
-    case "on":
-      (taxRate = taxRateOn), (taxType = taxTypeOn);
+      default:
+        console.log(`Error`);
+        return;
+    }
+  },
 
-      break;
-    case "mb":
-      (taxRate = taxRateMb), (taxType = taxTypeMb);
+  calcTotalPurchasePrice: (taxAmount) => {
+    totalPurchasePrice = (
+      (saleItemAmount / (1 + discountAmount)) * (1 + taxAmount)
+    ).toFixed(2);
+  },
 
-      break;
-    default:
-      console.log(`Error`);
-      return;
-  }
-};
+  calcTaxAfterDiscount: (taxAmount) => {
+    taxAfterDiscount = (
+      (saleItemAmount - saleItemAmount * discountAmount) * taxAmount
+    ).toFixed(2);
+  },
 
-const calcTotalPurchasePrice = (taxAmount) => {
-  totalPurchasePrice = (
-    (saleItemAmount / (1 + discountAmount)) *
-    (1 + taxAmount)
-  ).toFixed(2);
-};
+  consolodateRequest: (location, taxRate) => {
+    app.setTaxData(location);
+    app.calcTotalPurchasePrice(taxRate);
+    app.calcTaxAfterDiscount(taxRate);
+  },
 
-const calcTaxAfterDiscount = (taxAmount) => {
-  taxAfterDiscount = (
-    (saleItemAmount - saleItemAmount * discountAmount) *
-    taxAmount
-  ).toFixed(2);
-};
-
-const consolodateRequest = (location, taxRate) => {
-  setTaxData(location);
-  calcTotalPurchasePrice(taxRate);
-  calcTaxAfterDiscount(taxRate);
-};
-
-const calculateTax = (location, taxRate) => {
-  switch (location) {
-    case "on":
-      (locationFlag = location),
+  calculateTax: (location, taxRate) => {
+    switch (location) {
+      case "on":
+        (locationFlag = location),
         (locationName = onData.name),
         (taxRate = taxRate);
+        app.consolodateRequest(location, taxRate);
+        break;
 
-      consolodateRequest(location, taxRate);
-
-      break;
-    case "mb":
-      (locationFlag = location),
+      case "mb":
+        (locationFlag = location),
         (locationName = mbData.name),
         (taxRate = taxRate);
+        app.consolodateRequest(location, taxRate);
+        break;
 
-      consolodateRequest(location, taxRate);
+      default:
+        console.log(`Error`);
+        return;
+    }
+  },
 
-      break;
-    default:
-      console.log(`Error`);
-      return;
-  }
+  handleSubmit: (event) => {
+    event.preventDefault();
+
+    const data = new FormData(event.target),
+      userData = Object.fromEntries(data.entries()),
+      appData = {
+      exchangeRate: exchangeRate,
+      exchangeRateDate: ratesAsOf,
+      userLocation: userData.location,
+      numberOfTanks: userData.gas,
+      numberOfWash: userData.wash,
+      washType: userData.washType,
+      sundries: userData.sundries,
+      weeksPerYear: cleanData.weeksPerYear,
+      fullTankPerWeek: cleanData.fullTankPerWeek,
+      purchaseDiscount: cleanData.purchaseDiscount,
+    };
+
+    app.hideShowWashType(appData.numberOfWash);
+    app.hideFormShowResults();
+    // app.getUserWashPrice(appData.washType);
+
+    app.calculateTax(
+      appData.userLocation,
+      appData.userLocation === "on"
+        ? cleanData.taxData.on.applicable
+        : cleanData.taxData.mb.applicable
+    );
+
+    app.resultsDisplay(
+      appData.userLocation,
+      appData.fullTankPerWeek,
+      cleanData.fuelDiscount,
+      cleanData.weeksPerYear,
+      appData.numberOfTanks,
+      appData.userLocation === "on"
+        ? cleanData.gasData.result[6].gasoline
+        : cleanData.gasData.result[2].gasoline,
+      appData.numberOfWash,
+      appData.washType,
+      appData.sundries,
+      appData.userLocation === "on"
+        ? cleanData.taxData.on.applicable
+        : cleanData.taxData.mb.applicable,
+      appData.userLocation === "on"
+        ? cleanData.taxData.on.type
+        : cleanData.taxData.mb.type,
+      appData.washDiscount,
+      appData.sundriesDiscount
+    );
+  },
+
+  // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
+  eventHandlers: () => {
+    console.log(`eventHandlers()`);
+    app.hideShowWashType();
+    resultsCollection.style.display = "none";
+    form.addEventListener("submit", app.handleSubmit);
+  },
 };
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-
-  const data = new FormData(event.target),
-    userData = Object.fromEntries(data.entries());
-
-  const appData = {
-    exchangeRate: exchangeRate,
-    exchangeRateDate: ratesAsOf,
-    userLocation: userData.location,
-    numberOfTanks: userData.gas,
-    numberOfWash: userData.wash,
-    washType: userData.washType,
-    sundries: userData.sundries,
-    weeksPerYear: cleanData.weeksPerYear,
-    fullTankPerWeek: cleanData.fullTankPerWeek,
-    purchaseDiscount: cleanData.purchaseDiscount,
-  };
-
-  hideShowWashType(appData.numberOfWash);
-  hideFormShowResults();
-  getUserWashPrice(appData.washType);
-
-  calculateTax(
-    appData.userLocation,
-    appData.userLocation === "on"
-      ? cleanData.taxData.on.applicable
-      : cleanData.taxData.mb.applicable
-  );
-
-  resultsDisplay(
-    appData.userLocation,
-    appData.fullTankPerWeek,
-    cleanData.fuelDiscount,
-    cleanData.weeksPerYear,
-    appData.numberOfTanks,
-    appData.userLocation === "on"
-      ? cleanData.gasData.result[6].gasoline
-      : cleanData.gasData.result[2].gasoline,
-    appData.numberOfWash,
-    appData.washType,
-    appData.sundries,
-    appData.userLocation === "on"
-      ? cleanData.taxData.on.applicable
-      : cleanData.taxData.mb.applicable,
-    appData.userLocation === "on"
-      ? cleanData.taxData.on.type
-      : cleanData.taxData.mb.type,
-    appData.washDiscount,
-    appData.sundriesDiscount
-  );
-}
-
-// ----- hideShowElements.js
-hideShowWashType();
-resultsCollection.style.display = "none";
-
-// -----
-form.addEventListener("submit", handleSubmit);
+// -------------------- LOAD init() --------------------
+window.addEventListener("load", () => {
+  app.init();
+});
