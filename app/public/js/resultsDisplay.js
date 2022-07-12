@@ -43,15 +43,32 @@ const fuelDiscountPerYear = (userSelectedNumberOfTanks, userSelectedGasPrice) =>
 }
 
 // 🚨 TODO: CONSTRUCT DATA FOR userSelectedWashPrice
-const washDiscountPerYear = (userSelectedWashesPerWeek, userTaxRate) => {
-  let userSelectedWashPrice = setUserWashPrice,
-    washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate),
-    washCostPerYear = washWithTax * cleanData.weeksPerYear,
+const washDiscountPerYear = (userSelectedWashesPerWeek, washType, userTaxRate) => {
+  const washData = (washPrice) => {
+    userSelectedWashPrice = washPrice
+    washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
+    washCostPerYear = washWithTax * cleanData.weeksPerYear;
     washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
+  };
+  let washWithTax = (userSelectedWashesPerWeek * washType) * (1 + userTaxRate);
+
+  switch (washType) {
+    case "deluxe":
+      washData(washPrice.silver);
+      break;
+
+    case "ultimate":
+      washData(washPrice.gold);
+      break;
+
+    default:
+      washData(washPrice.bronze);
+      break;
+  }
 
   washResult.innerHTML = ``;
   washResult.innerHTML = `
-    <p>User purchases ${userSelectedWashesPerWeek} car washes per week</p>
+    <p>User purchases ${userSelectedWashesPerWeek} car washe(s) per week</p>
     <p>User selected wash price is: $${userSelectedWashPrice}</p>
     <p>User's regional tax rate is: ${userTaxRate * 100}%</p>
     <p>One week of car washes with tax is: $${washWithTax.toFixed(2)}</p>
