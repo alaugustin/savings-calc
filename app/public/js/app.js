@@ -49,6 +49,7 @@ const cleanGasData = cleanData.gasData,
         gasResult: document.getElementById("gasResult"),
         washResult: document.getElementById("washResult"),
         sundriesResult: document.getElementById("sundriesResult"),
+        totalResult: document.getElementById("totalResult"),
         locationOn: "on",
         locationMb: "mb",
         discountAmount: 0.05,
@@ -164,11 +165,19 @@ const cleanGasData = cleanData.gasData,
       <hr />`;
     },
 
+    tallyResults: () => {
+      totalResult.innerHTML = ``;
+      totalResult.innerHTML = `
+      <h3>Total savings</h3>
+      `;
+    },
+
     resultsDisplay: (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
 
       app.fuelDiscountPerYear(numberOfTanks, gasPriceCadFixed);
       app.washDiscountPerYear(numberOfWash, washType, taxRate);
       app.instoreDiscountPerYear(sundries, taxRate);
+      app.tallyResults();
     },
 
     setTaxData: (location) => {
