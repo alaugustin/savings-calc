@@ -61,7 +61,8 @@ const cleanGasData = cleanData.gasData,
     },
 
     onDomReady: () => {
-      console.log(`onDomReady()`);
+      app.hideShowWashType();
+      resultsCollection.style.display = "none";
       console.log(app.config.cleanData);
     },
 
@@ -278,8 +279,6 @@ const cleanGasData = cleanData.gasData,
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
   eventHandlers: () => {
-    app.hideShowWashType();
-    resultsCollection.style.display = "none";
     app.config.form.addEventListener("submit", app.handleSubmit);
   },
 };
