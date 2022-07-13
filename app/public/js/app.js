@@ -92,10 +92,16 @@ const cleanGasData = cleanData.gasData,
       app.config.washTypeHolderDiv.style.display = "block";
     },
 
+    resultComment: (discountedPrice, prodType) => {
+      return `<p style="background: yellow">After discount user spends a total of $${discountedPrice} in ${prodType} a year</p>`;
+    },
+
     fuelDiscountPerYear: (userSelectedNumberOfTanks, userSelectedGasPrice) => {
       let fuelCostPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * userSelectedGasPrice) * cleanData.weeksPerYear,
         fuelDiscountPerYear = ((cleanData.fullTankPerWeek * userSelectedNumberOfTanks) * cleanData.fuelDiscount) * cleanData.weeksPerYear,
         fuelSavingsPerYear = fuelCostPerYear - fuelDiscountPerYear;
+
+      const fuel = "fuel";
 
       gasResult.innerHTML = ``;
       gasResult.innerHTML = `
@@ -106,19 +112,20 @@ const cleanGasData = cleanData.gasData,
       <p>The standard fuel discount is $${cleanData.fuelDiscount} per litre</p>
       <p>User buys $${fuelCostPerYear.toFixed(2)} in fuel per year</p>
       <p>User saves a total of $${fuelDiscountPerYear.toFixed(2)}</p>
-      <p style="background: yellow">Fuel savings $${fuelSavingsPerYear.toFixed(2)} per year after discount</p>
+      ${app.resultComment(fuelSavingsPerYear.toFixed(2), fuel)}
       <hr />`;
     },
 
     washDiscountPerYear: (userSelectedWashesPerWeek, washType, userTaxRate) => {
       let washWithTax = (userSelectedWashesPerWeek * washType) * (1 + userTaxRate);
 
-      const washData = (washPrice) => {
-        userSelectedWashPrice = washPrice
-        washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
-        washCostPerYear = washWithTax * cleanData.weeksPerYear;
-        washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
-      };
+      const carWash = "car washes",
+        washData = (washPrice) => {
+          userSelectedWashPrice = washPrice
+          washWithTax = (userSelectedWashesPerWeek * userSelectedWashPrice) * (1 + userTaxRate);
+          washCostPerYear = washWithTax * cleanData.weeksPerYear;
+          washDiscount = washCostPerYear - (washCostPerYear * (cleanData.purchaseDiscount));
+        };
 
       switch (washType) {
         case "silver":
@@ -142,12 +149,13 @@ const cleanGasData = cleanData.gasData,
       <p>One week of car washes with tax is: $${washWithTax.toFixed(2)}</p>
       <p>User buys $${washCostPerYear.toFixed(2)} in washes a year</p>
       <p>User saves a total of $${(washCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
-      <p style="background: yellow">After discount user spends a total of $${washDiscount.toFixed(2)} in car washes a year</p>
+      ${app.resultComment(washDiscount.toFixed(2), carWash)}
       <hr />`;
     },
 
     instoreDiscountPerYear: (userInstorePerWeek, userTaxRate) => {
-      const instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate),
+      const store = "store",
+        instorePerWeekWitTax = userInstorePerWeek * (1 + userTaxRate),
         instoreCostPerYear = instorePerWeekWitTax * cleanData.weeksPerYear,
         instoreDiscount = instoreCostPerYear - (instoreCostPerYear * cleanData.purchaseDiscount);
 
@@ -158,7 +166,7 @@ const cleanGasData = cleanData.gasData,
       <p>User spends $${instorePerWeekWitTax.toFixed(2)} per week with tax</p>
       <p>User buys $${instoreCostPerYear.toFixed(2)} in store a year</p>
       <p>User saves a total of $${(instoreCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
-      <p style="background: yellow">After discount user spends a total of $${instoreDiscount.toFixed(2)} in store a year</p>
+      ${app.resultComment(instoreDiscount.toFixed(2), store)}
       <hr />`;
     },
 
