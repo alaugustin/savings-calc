@@ -106,13 +106,10 @@ const cleanGasData = cleanData.gasData,
 
       gasResult.innerHTML = ``;
       gasResult.innerHTML = `
-      <p>Standard full tank of gas per week: ${cleanData.fullTankPerWeek} litres</p>
-      <p>User buys ${userSelectedNumberOfTanks} tank(s) of gas a week</p>
-      <p>Average gas price for user is: $${userSelectedGasPrice}</p>
-      <p>There are ${cleanData.weeksPerYear} weeks per year</p>
+      <p>User buys ${userSelectedNumberOfTanks} tank(s) of gas a week at an average price of $${userSelectedGasPrice}</p>
       <p>The standard fuel discount is $${cleanData.fuelDiscount} per litre</p>
-      <p>User buys $${fuelCostPerYear.toFixed(2)} in fuel per year</p>
-      <p>User saves a total of $${fuelDiscountPerYear.toFixed(2)}</p>
+      <p style="background: yellow">User buys $${fuelCostPerYear.toFixed(2)} in fuel per year before discount</p>
+      <p style="background: yellow">User saves a total of $${fuelDiscountPerYear.toFixed(2)} per year</p>
       ${app.resultComment(fuelSavingsPerYear.toFixed(2), fuel)}
       <hr />`;
     },
@@ -144,12 +141,10 @@ const cleanGasData = cleanData.gasData,
 
       washResult.innerHTML = ``;
       washResult.innerHTML = `
-      <p>User purchases ${userSelectedWashesPerWeek} car washe(s) per week</p>
-      <p>User selected wash price is: $${userSelectedWashPrice}</p>
-      <p>User's regional tax rate is: ${userTaxRate * 100}%</p>
+      <p>User purchases ${userSelectedWashesPerWeek} car washe(s) *wash name* per week at $${userSelectedWashPrice}</p>
       <p>One week of car washes with tax is: $${washWithTax.toFixed(2)}</p>
-      <p>User buys $${washCostPerYear.toFixed(2)} in washes a year</p>
-      <p>User saves a total of $${(washCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
+      <p style="background: yellow">User buys $${washCostPerYear.toFixed(2)} in washes a year</p>
+      <p style="background: yellow">User saves a total of $${(washCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
       ${app.resultComment(washDiscount.toFixed(2), carWash)}
       <hr />`;
     },
@@ -162,11 +157,9 @@ const cleanGasData = cleanData.gasData,
 
       sundriesResult.innerHTML = ``;
       sundriesResult.innerHTML = `
-      <p>User spends $${userInstorePerWeek} in store per week</p>
-      <p>User's regional tax rate is: ${userTaxRate * 100}%</p>
-      <p>User spends $${instorePerWeekWitTax.toFixed(2)} per week with tax</p>
-      <p>User buys $${instoreCostPerYear.toFixed(2)} in store a year</p>
-      <p>User saves a total of $${(instoreCostPerYear * cleanData.purchaseDiscount).toFixed(2)}</p>
+      <p>User spends $${instorePerWeekWitTax.toFixed(2)} in store per week with tax</p>
+      <p style="background: yellow">User buys $${instoreCostPerYear.toFixed(2)} in store a year defore discount</p>
+      <p style="background: yellow">User saves a total of $${(instoreCostPerYear * cleanData.purchaseDiscount).toFixed(2)} per year</p>
       ${app.resultComment(instoreDiscount.toFixed(2), store)}
       <hr />`;
     },
