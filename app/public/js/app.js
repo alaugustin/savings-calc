@@ -57,8 +57,8 @@ const cleanGasData = cleanData.gasData,
         fuelDiscount: cleanData.fuelDiscount,
         fullTankPerWeek: cleanData.fullTankPerWeek,
         weeksPerYear: cleanData.weeksPerYear,
-        weeksPerYear: cleanData.weeksPerYear,
         purchaseDiscount: cleanData.purchaseDiscount,
+        gasData: cleanData.gasData,
       };
 
       // CALL DOM INVOKING FUNCTIONS HERE --------------------
@@ -69,21 +69,22 @@ const cleanGasData = cleanData.gasData,
     onDomReady: () => {
       app.hideShowWashType();
       resultsCollection.style.display = "none";
-      console.log(app.config.cleanData);
+      // console.log(app.config.gasData);
     },
 
     hideShowWashType: () => {
-      const eventTypes = ['change', 'blur', 'keyup'];
+      const appConfig = app.config,
+        eventTypes = ['change', 'blur', 'keyup'];
 
-      app.config.selectElement > 1
-        ? app.config.washTypeHolderDiv.style.display = "block"
-        : app.config.washTypeHolderDiv.style.display = "none";
+      appConfig.selectElement > 1
+        ? appConfig.washTypeHolderDiv.style.display = "block"
+        : appConfig.washTypeHolderDiv.style.display = "none";
 
       eventTypes.forEach(eventType => {
-        app.config.selectElement.addEventListener(eventType, (event) => {
+        appConfig.selectElement.addEventListener(eventType, (event) => {
           event.target.value > 0
-            ? app.config.washTypeHolderDiv.style.display = "block"
-            : app.config.washTypeHolderDiv.style.display = "none";
+            ? appConfig.washTypeHolderDiv.style.display = "block"
+            : appConfig.washTypeHolderDiv.style.display = "none";
         });
       });
     },
@@ -251,7 +252,8 @@ const cleanGasData = cleanData.gasData,
     handleSubmit: (event) => {
       event.preventDefault();
 
-      const data = new FormData(event.target),
+      const appConfig = app.config,
+        data = new FormData(event.target),
         userData = Object.fromEntries(data.entries()),
         appData = {
         exchangeRate: exchangeRate,
@@ -261,9 +263,9 @@ const cleanGasData = cleanData.gasData,
         numberOfWash: userData.wash,
         washType: userData.washType,
         sundries: userData.sundries,
-        weeksPerYear: cleanData.weeksPerYear,
-        fullTankPerWeek: cleanData.fullTankPerWeek,
-        purchaseDiscount: cleanData.purchaseDiscount,
+        weeksPerYear: appConfig.weeksPerYear,
+        fullTankPerWeek: appConfig.fullTankPerWeek,
+        purchaseDiscount: appConfig.purchaseDiscount,
       };
 
       app.hideShowWashType(appData.numberOfWash);
@@ -272,28 +274,28 @@ const cleanGasData = cleanData.gasData,
       app.calculateTax(
         appData.userLocation,
         appData.userLocation === "on"
-          ? cleanData.taxData.on.applicable
-          : cleanData.taxData.mb.applicable
+          ? onData.applicable
+          : mbData.applicable
       );
 
       app.resultsDisplay(
         appData.userLocation,
         appData.fullTankPerWeek,
-        cleanData.fuelDiscount,
-        cleanData.weeksPerYear,
+        appConfig.fuelDiscount,
+        appConfig.weeksPerYear,
         appData.numberOfTanks,
         appData.userLocation === "on"
-          ? cleanData.gasData.result[6].gasoline
-          : cleanData.gasData.result[2].gasoline,
+          ? appConfig.gasData.result[6].gasoline
+          : appConfig.gasData.result[2].gasoline,
         appData.numberOfWash,
         appData.washType,
         appData.sundries,
         appData.userLocation === "on"
-          ? cleanData.taxData.on.applicable
-          : cleanData.taxData.mb.applicable,
+          ? onData.applicable
+          : mbData.applicable,
         appData.userLocation === "on"
-          ? cleanData.taxData.on.type
-          : cleanData.taxData.mb.type,
+          ? onData.type
+          : mbData.type,
         appData.washDiscount,
         appData.sundriesDiscount
       );
