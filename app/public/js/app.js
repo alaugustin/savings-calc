@@ -146,8 +146,7 @@ const cleanGasData = cleanData.gasData,
       <hr />`;
     },
 
-    calcWashDiscount: (numberOfWash) => {
-      const appConfig = app.config,
+    calcWashDiscount: (numberOfWash, washType) => {
         washData = (washPrice) => {
           userSelectedWashPrice = washPrice
           washWithTax = (numberOfWash * userSelectedWashPrice) * (1 + taxRate);
@@ -197,7 +196,7 @@ const cleanGasData = cleanData.gasData,
     resultsDisplay: (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
 
       app.calcFuelDiscount(numberOfTanks, gasPriceCadFixed);
-      app.calcWashDiscount(numberOfWash);
+      app.calcWashDiscount(numberOfWash, washType);
       app.calcInstoreDiscount(sundries);
     },
 
