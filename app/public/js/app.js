@@ -69,7 +69,7 @@ const cleanGasData = cleanData.gasData,
     onDomReady: () => {
       app.hideShowWashType();
       resultsCollection.style.display = "none";
-      // console.log(app.config.gasData);
+      // console.log(app.config.purchaseDiscount);
     },
 
     hideShowWashType: () => {
@@ -100,16 +100,27 @@ const cleanGasData = cleanData.gasData,
       app.config.washTypeHolderDiv.style.display = "block";
     },
 
-    resultComment: (costPerYear, discountPY, prodType) => {
+    totaSavings: (gasSavings, washSavings, storeSavings) => {
+      let tallySavings = gasSavings + washSavings + storeSavings;
+
       totalResult.innerHTML = ``;
       totalResult.innerHTML = `
       <h3>Total savings</h3>
+      <p>Gas $${gasSavings} + Car Wash $${washSavings} + In-Store $${storeSavings} = <strong>$${tallySavings.toFixed(2)} per year.</strong></p>
       `;
+    },
+
+    resultComment: (costPerYear, discountPY, prodType) => {
+      app.totaSavings(app.gasSavings(), app.washSavings(), app.storeSavings());
 
       return `
         <p style="background: yellow">User buys $${costPerYear} in ${prodType} per year before discount</p>
         <p style="background: yellow">User saves a total of $${discountPY} per year</p>
       `;
+    },
+
+    gasSavings: () => {
+      return 85.80
     },
 
     fuelDiscountPerYear: (fuelCostPerYear, userSelectedNumberOfTanks, userSelectedGasPrice, fuelDiscountPerYear) => {
@@ -118,7 +129,7 @@ const cleanGasData = cleanData.gasData,
       gasResult.innerHTML = ``;
       gasResult.innerHTML = `
       <h3>Fuel</h3>
-      <p>User buys ${userSelectedNumberOfTanks} tank(s) of gas a week at an average price of $${userSelectedGasPrice}</p>
+      <p>User buys ${userSelectedNumberOfTanks} tank(s) of gas a week at an average price of $${userSelectedGasPrice} per litre</p>
       <p>The standard fuel discount is $${app.config.fuelDiscount} per litre</p>
       ${app.resultComment(fuelCostPerYear.toFixed(2), fuelDiscountPerYear.toFixed(2), fuel)}
       <hr />`;
@@ -134,19 +145,24 @@ const cleanGasData = cleanData.gasData,
       app.fuelDiscountPerYear(fuelCostPerYear, numberOfTanks, gasPriceCadFixed, fuelDiscountPerYear);
     },
 
+    washSavings: () => {
+      return 58.70
+    },
+
     washDiscountPerYear: (userSelectedWashesPerWeek, washType, washWithTax) => {
       const carWash = "car washes";
 
       washResult.innerHTML = ``;
       washResult.innerHTML = `
       <h3>Car wash</h3>
-      <p>User purchases ${userSelectedWashesPerWeek} ${washType} car wash(es) per week at $${userSelectedWashPrice}</p>
-      <p>One week of car washes with tax is: $${washWithTax.toFixed(2)}</p>
+      <p>User purchases ${userSelectedWashesPerWeek} ${washType} car wash(es) per week for $${washWithTax.toFixed(2)} after tax.</p>
+      <p>The standard car wash discount is ${app.config.purchaseDiscount*100}%</p>
       ${app.resultComment(washCostPerYear.toFixed(2), withDiscount.toFixed(2), carWash)}
       <hr />`;
     },
 
     calcWashDiscount: (numberOfWash, washType) => {
+      const appConfig = app.config,
         washData = (washPrice) => {
           userSelectedWashPrice = washPrice
           washWithTax = (numberOfWash * userSelectedWashPrice) * (1 + taxRate);
@@ -158,27 +174,35 @@ const cleanGasData = cleanData.gasData,
       switch (washType) {
         case "silver":
           washData(washPrice.silver);
+          selectedWash = "Silver"
           break;
 
         case "gold":
           washData(washPrice.gold);
+          selectedWash = "Gold"
           break;
 
         default:
           washData(washPrice.bronze);
+          selectedWash = "Bronze"
           break;
       }
 
-      app.washDiscountPerYear(numberOfWash, washType, washWithTax); //userSelectedWashesPerWeek, washType, userTaxRate
+      app.washDiscountPerYear(numberOfWash, selectedWash, washWithTax);
     },
 
-    instoreDiscountPerYear: (instorePerWeekWitTax, instoreCostPerYear) => {
+    storeSavings: () => {
+      return 5.88
+    },
+
+    instoreDiscountPerYear: (instorePerWeekWitTax, instoreCostPerYear, withDiscount) => {
       const store = "store";
 
       sundriesResult.innerHTML = ``;
       sundriesResult.innerHTML = `
       <h3>In-store</h3>
       <p>User spends $${instorePerWeekWitTax} in store per week with tax</p>
+      <p>The standard in-store purchase discount is 10%</p>
       ${app.resultComment(instoreCostPerYear.toFixed(2), withDiscount.toFixed(2), store)}
       <hr />`;
     },
@@ -190,7 +214,7 @@ const cleanGasData = cleanData.gasData,
         instoreCostPerYear = instorePerWeekWitTax * appConfig.weeksPerYear,
         withDiscount = (instoreCostPerYear * appConfig.purchaseDiscount);
 
-      app.instoreDiscountPerYear(sundries, instoreCostPerYear);
+      app.instoreDiscountPerYear(sundries, instoreCostPerYear, withDiscount);
     },
 
     resultsDisplay: (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
