@@ -5,30 +5,40 @@
 <form id="mainForm" method="post">
   <p>{{selectProvinceLabel}}</p>
 
-  {{#each provinceList}}
-    <input type="radio" id="{{this.locationFlag}}" name="location" value="{{this.locationFlag}}" required>
-    <label for="{{this.locationFlag}}">{{this.name}}</label><br>
-  {{/each}}
+  <div class="form-group">
+    {{#each provinceList}}
+      <div class="form-check form-check-inline">
+        <input type="radio" id="{{this.locationFlag}}" class="form-check-input" name="location" value="{{this.locationFlag}}" required>
+        <label class="form-check-label" for="{{this.locationFlag}}">{{this.name}}</label>
+      </div>
+    {{/each}}
+  </div>
 
-  <label for="gas">{{gasTankLabel}}</label><br>
-  <input type="number" id="gas" name="gas" placeholder="0" min="0" required><br>
+  <div class="form-group">
+    <label for="gas">{{gasTankLabel}}</label><br>
+    <input type="number" id="gas" class="form-control" name="gas" placeholder="0" min="0">
+  </div>
 
-  <label for="wash">{{washLable}}</label><br>
-  <input type="number" id="wash" name="wash" placeholder="0" min="0" required><br>
+  <div class="form-group">
+    <label for="wash">{{washLable}}</label><br>
+    <input type="number" id="wash" class="form-control" name="wash" placeholder="0" min="0">
+  </div>
 
-  <div id="washTypeHolder">
+  <div id="washTypeHolder" class="form-group">
     <label for="washType">{{washTypeLable}}</label><br>
-    <select name="washType" id="washType">
+    <select name="washType" id="washType" class="form-control">
       {{#each washList}}
       <option value="{{this.washType}}">{{this.name}}</option>
       {{/each}}
-    </select><br>
+    </select>
   </div>
 
-  <label for="sundries">{{sundriesLabel}}</label><br>
-  <input type="number" step=".01" id="sundries" name="sundries" placeholder="0.00" min="0" required><br>
+  <div class="form-group">
+    <label for="sundries">{{sundriesLabel}}</label><br>
+    <input type="number" step=".01" id="sundries" class="form-control" name="sundries" placeholder="0.00" min="0" required>
+  </div>
 
-  <button type="submit">Submit</button>
+  <button type="submit" class="btn btn-outline-secondary btn-sm">Submit</button>
 </form>
 
 <section id="resultsCollection">
