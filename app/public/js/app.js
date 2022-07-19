@@ -78,29 +78,36 @@ const cleanGasData = cleanData.gasData,
 
     hideShowWashType: () => {
       const appConfig = app.config,
-        eventTypes = ['change', 'blur', 'keyup'];
+        eventTypes = ["change", "blur", "keyup"];
 
-      appConfig.selectElement > 1
-        ? appConfig.washTypeHolderDiv.style.display = "block"
-        : appConfig.washTypeHolderDiv.style.display = "none";
+      const toggleWashType = (selectElement, selectValue, washTypeHolderDivIf, washTypeHolderDivElse) => {
+        const washTypeDiv = appConfig.washTypeHolderDiv;
 
-      eventTypes.forEach(eventType => {
+        selectElement > selectValue
+          ? (washTypeDiv.style.display = washTypeHolderDivIf)
+          : (washTypeDiv.style.display = washTypeHolderDivElse);
+      };
+
+      toggleWashType(appConfig.selectElement, 1, "block", "none");
+
+      eventTypes.forEach((eventType) => {
         appConfig.selectElement.addEventListener(eventType, (event) => {
-          event.target.value > 0
-            ? appConfig.washTypeHolderDiv.style.display = "block"
-            : appConfig.washTypeHolderDiv.style.display = "none";
+          toggleWashType(event.target.value, 0, "block", "none");
         });
       });
     },
 
+    hideShowResults: (resultsCollectionDisplay, mainFormDisplay) => {
+      resultsCollection.style.display = resultsCollectionDisplay;
+      mainForm.style.display = mainFormDisplay;
+    },
+
     hideFormShowResults: () => {
-      resultsCollection.style.display = "block";
-      mainForm.style.display = "none";
+      app.hideShowResults("block", "none");
     },
 
     showFormHideResults: () => {
-      resultsCollection.style.display = "none";
-      mainForm.style.display = "block";
+      app.hideShowResults("none", "block");
       app.config.washTypeHolderDiv.style.display = "block";
     },
 
@@ -143,17 +150,17 @@ const cleanGasData = cleanData.gasData,
       switch (washType) {
         case "silver":
           washData(washPrice.silver);
-          selectedWash = "Silver"
+          selectedWash = "Silver";
           break;
 
         case "gold":
           washData(washPrice.gold);
-          selectedWash = "Gold"
+          selectedWash = "Gold";
           break;
 
         default:
           washData(washPrice.bronze);
-          selectedWash = "Bronze"
+          selectedWash = "Bronze";
           break;
       }
 
@@ -198,13 +205,17 @@ const cleanGasData = cleanData.gasData,
     },
 
     setTaxData: (location) => {
+      const rateAndType = (userTaxRate, userTaxtype) => {
+        (taxRate = userTaxRate), (taxType = userTaxtype);
+      };
+
       switch (location) {
         case "mb":
-          (taxRate = taxRateMb), (taxType = taxTypeMb);
+          rateAndType(taxRateMb, taxTypeMb)
           break;
 
         default:
-          (taxRate = taxRateOn), (taxType = taxTypeOn);
+          rateAndType(taxRateOn, taxTypeOn)
           return;
       }
     },
@@ -252,17 +263,17 @@ const cleanGasData = cleanData.gasData,
         data = new FormData(event.target),
         userData = Object.fromEntries(data.entries()),
         appData = {
-        exchangeRate: exchangeRate,
-        exchangeRateDate: ratesAsOf,
-        userLocation: userData.location,
-        numberOfTanks: userData.gas,
-        numberOfWash: userData.wash,
-        washType: userData.washType,
-        sundries: userData.sundries,
-        weeksPerYear: appConfig.weeksPerYear,
-        fullTankPerWeek: appConfig.fullTankPerWeek,
-        purchaseDiscount: appConfig.purchaseDiscount,
-      };
+          exchangeRate: exchangeRate,
+          exchangeRateDate: ratesAsOf,
+          userLocation: userData.location,
+          numberOfTanks: userData.gas,
+          numberOfWash: userData.wash,
+          washType: userData.washType,
+          sundries: userData.sundries,
+          weeksPerYear: appConfig.weeksPerYear,
+          fullTankPerWeek: appConfig.fullTankPerWeek,
+          purchaseDiscount: appConfig.purchaseDiscount,
+        };
 
       app.hideShowWashType(appData.numberOfWash);
       app.hideFormShowResults();
