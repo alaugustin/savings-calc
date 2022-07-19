@@ -1,53 +1,51 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00b7ff;
+    color: #00b7ff;
 }
 
 .buttonLookLikeLink {
-  color: blue;
-  background: none;
-  margin: 0;
-  padding: 0;
-  border: none;
-  cursor: pointer;
+    color: blue;
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
 }
 
 .totalTable {
-  max-width: 300px;
+    max-width: 300px;
 }
-
 .totalTable .calcBottom {
-  border-bottom: 4px double;
-  padding-bottom: 4px;
-  margin-bottom: 4px;
+    border-bottom: 4px double;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
 }
-
 .totalTable .sumRow {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 #totalResult {
-  font-size: 1.0625rem;
+    font-size: 1.0625rem;
 }
 
 .tableRow {
-  display: flex;
+    display: flex;
 }
-
 .tableRow .productTotal {
-  font-size: 1.125rem;
-  font-weight: 700;
+    font-size: 1.125rem;
+    font-weight: 700;
 }
-
-.tableRow .colA {flex-basis: 20%;}
-
-.tableRow .colB {flex-basis: 50%;}
-
+.tableRow .colA {
+    flex-basis: 20%;
+}
+.tableRow .colB {
+    flex-basis: 50%;
+}
 .tableRow .colC {
-  flex-basis: 30%;
-  text-align: right;
+    flex-basis: 30%;
+    text-align: right;
 }

@@ -1,0 +1,57 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+.buttonLookLikeLink {
+  color: blue;
+  background: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.totalTable {
+  max-width: 300px;
+
+  .calcBottom {
+    border-bottom: 4px double;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
+
+  .sumRow {
+    margin-bottom: 16px;
+  }
+}
+
+#totalResult {
+  font-size: 1.0625rem;
+}
+
+.tableRow {
+  display: flex;
+
+  .productTotal {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .colA {
+    flex-basis: 20%;
+  }
+
+  .colB {
+    flex-basis: 50%;
+  }
+
+  .colC {
+    flex-basis: 30%;
+    text-align: right;
+  }
+}
