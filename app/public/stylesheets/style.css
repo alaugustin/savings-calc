@@ -15,3 +15,39 @@ a {
   border: none;
   cursor: pointer;
 }
+
+.totalTable {
+  max-width: 300px;
+}
+
+.totalTable .calcBottom {
+  border-bottom: 4px double;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+.totalTable .sumRow {
+  margin-bottom: 16px;
+}
+
+#totalResult {
+  font-size: 1.0625rem;
+}
+
+.tableRow {
+  display: flex;
+}
+
+.tableRow .productTotal {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.tableRow .colA {flex-basis: 20%;}
+
+.tableRow .colB {flex-basis: 50%;}
+
+.tableRow .colC {
+  flex-basis: 30%;
+  text-align: right;
+}

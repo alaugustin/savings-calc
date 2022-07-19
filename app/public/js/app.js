@@ -53,6 +53,7 @@ const cleanGasData = cleanData.gasData,
         washSavings: document.getElementById("washSavings"),
         storeSavings: document.getElementById("storeSavings"),
         savingsTotal: document.getElementById("savingsTotal"),
+        totalTable: document.querySelector(".totalTable"),
         locationOn: "on",
         locationMb: "mb",
         discountAmount: 0.05,
@@ -101,6 +102,21 @@ const cleanGasData = cleanData.gasData,
       resultsCollection.style.display = "none";
       mainForm.style.display = "block";
       app.config.washTypeHolderDiv.style.display = "block";
+    },
+
+    calcTblBtmTreatment: () => {
+      let totalTable = app.config.totalTable,
+        calcBottom = totalTable.children[2],
+        sumRow = totalTable.children[3],
+        calcBottomClass = "calcBottom",
+        sumRowClass = "sumRow";
+
+        const addClass = (target, className) => {
+          target.classList.add(className);
+        };
+
+        addClass(calcBottom, calcBottomClass);
+        addClass(sumRow, sumRowClass);
     },
 
     resultsDisplay: (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
@@ -177,6 +193,8 @@ const cleanGasData = cleanData.gasData,
       };
 
       calcTotalSavings(fuelDiscountNUM, washDiscountNUM, storeDiscountNUM);
+
+      app.calcTblBtmTreatment();
     },
 
     setTaxData: (location) => {

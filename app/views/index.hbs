@@ -47,9 +47,29 @@
   </div>
   <div id="totalResult">
     <h3>Total Savings</h3>
-    <p>
-      Gas <span id="gasSavings"></span> + Car Wash <span id="washSavings"></span> + In-store <span id="storeSavings"></span> = <strong>$<span id="savingsTotal"></span></strong>
-    </p>
+
+    <div class="totalTable">
+      <div class="tableRow">
+        <div class="colA"></div>
+        <div class="colB">Gas</div>
+        <div class="colC"><span class="productTotal">$<span id="gasSavings"></span></span></div>
+      </div>
+      <div class="tableRow">
+        <div class="colA"></div>
+        <div class="colB">Car Wash</div>
+        <div class="colC"><span class="productTotal">$<span id="washSavings"></span></span></div>
+      </div>
+      <div class="tableRow">
+        <div class="colA"></div>
+        <div class="colB">In-store</div>
+        <div class="colC"><span class="productTotal">$<span id="storeSavings"></span></span></div>
+      </div>
+      <div class="tableRow">
+        <div class="colA">+</div>
+        <div class="colB">Yearly savings</div>
+        <div class="colC"><span class="productTotal">$<span id="savingsTotal"></span></span></div>
+      </div>
+    </div>
   </div>
   <button id="backToForm" class="buttonLookLikeLink" onclick="app.showFormHideResults()">Back to form</a>
 </section>
