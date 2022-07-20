@@ -115,11 +115,11 @@ const cleanGasData = cleanData.gasData,
       let totalTable = app.config.totalTable,
         calcBottom = totalTable.children[2],
         sumRow = totalTable.children[3],
-        calcBottomClass = "calcBottom",
-        sumRowClass = "sumRow";
+        calcBottomClass = ["calcBottom", "mb-1"],
+        sumRowClass = ["sumRow", "mb-1"];
 
         const addClass = (target, className) => {
-          target.classList.add(className);
+          target.classList.add(...className);
         };
 
         addClass(calcBottom, calcBottomClass);
@@ -167,8 +167,7 @@ const cleanGasData = cleanData.gasData,
       const displaySavings = (productHolder, productQty, productName, savingsHolder, savingsAmount, purchaseInfo, saveInfo, productPY) => {
         productHolder.innerHTML = ``;
         productHolder.innerHTML = `
-        <p>User purchases ${productQty} ${productName} per week ${purchaseInfo} for around $${productPY} per year.</p>
-        <p>User saves $${savingsAmount.toFixed(2)} per year after ${saveInfo}</p>
+        <p>User purchases <span class="font-weight-bold">${productQty}</span> ${productName} per week ${purchaseInfo} for around <span class="font-weight-bold">$${productPY}</span> per year and saves <span class="font-weight-bold">$${savingsAmount.toFixed(2)}</span> per year after ${saveInfo}</p>
         `;
         savingsHolder.innerHTML = ``;
         savingsHolder.innerHTML = savingsAmount.toFixed(2);
@@ -178,12 +177,12 @@ const cleanGasData = cleanData.gasData,
         gasPurchaseDesc = `tank(s) of gas`,
         washPurchaseDesc = `${selectedWash} car wash(es)`,
         storePurchaseDesc = `in store`,
-        gasPurchaseInfo = `at an average price of $${gasPriceNUM} per litre`,
-        washPurchaseInfo = `for $${washWithTax.toFixed(2)} after tax`,
+        gasPurchaseInfo = `at an average price of <span class="font-weight-bold">$${gasPriceNUM}</span> per litre`,
+        washPurchaseInfo = `for <span class="font-weight-bold">$${washWithTax.toFixed(2)}</span> after tax`,
         storePurchaseInfo = `after tax`,
-        gasSavingsInfo = `fuel discount of $${app.config.fuelDiscount} per litre.`,
-        washSavingsInfo = `car wash discount of $${tenPercent}%.`,
-        storeSavingsInfo = `in-store discount of $${tenPercent}%.`,
+        gasSavingsInfo = `fuel discount of <span class="font-weight-bold">$${app.config.fuelDiscount}</span> per litre.`,
+        washSavingsInfo = `car wash discount of <span class="font-weight-bold">$${tenPercent}%</span>.`,
+        storeSavingsInfo = `in-store discount of <span class="font-weight-bold">$${tenPercent}%</span>.`,
         gasPY = fuelCostPerYear.toFixed(2),
         washPY = washCostPerYear.toFixed(2),
         storePY = instoreCostPerYear.toFixed(2);

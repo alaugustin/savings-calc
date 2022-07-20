@@ -3,7 +3,7 @@
 <hr>
 
 <form id="mainForm" method="post">
-  <p>{{selectProvinceLabel}}</p>
+  <h2>{{selectProvinceLabel}}</h2>
 
   <div class="form-group">
     {{#each provinceList}}
@@ -16,17 +16,17 @@
 
   <div class="form-group">
     <label for="gas">{{gasTankLabel}}</label><br>
-    <input type="number" id="gas" class="form-control" name="gas" placeholder="0" min="0">
+    <input type="number" id="gas" class="form-control form-control-sm" name="gas" placeholder="0" min="0">
   </div>
 
   <div class="form-group">
     <label for="wash">{{washLable}}</label><br>
-    <input type="number" id="wash" class="form-control" name="wash" placeholder="0" min="0">
+    <input type="number" id="wash" class="form-control form-control-sm" name="wash" placeholder="0" min="0">
   </div>
 
   <div id="washTypeHolder" class="form-group">
     <label for="washType">{{washTypeLable}}</label><br>
-    <select name="washType" id="washType" class="form-control">
+    <select name="washType" id="washType" class="form-control form-control-sm">
       {{#each washList}}
       <option value="{{this.washType}}">{{this.name}}</option>
       {{/each}}
@@ -35,7 +35,7 @@
 
   <div class="form-group">
     <label for="sundries">{{sundriesLabel}}</label><br>
-    <input type="number" step=".01" id="sundries" class="form-control" name="sundries" placeholder="0.00" min="0" required>
+    <input type="number" step=".01" id="sundries" class="form-control form-control-sm" name="sundries" placeholder="0.00" min="0" required>
   </div>
 
   <button type="submit" class="btn btn-outline-secondary btn-sm">Submit</button>
@@ -43,43 +43,48 @@
 
 <section id="resultsCollection">
   <h2>Example of yearly savings </h2>
+
   <div>
     <h3>Fuel savings</h3>
     <div id="gasResult"></div>
   </div>
+
   <div>
     <h3>Car wash savings</h3>
     <div id="washResult"></div>
   </div>
+
   <div>
     <h3>In-store savings</h3>
     <div id="sundriesResult"></div>
   </div>
+
   <div id="totalResult">
     <h3>Total Savings</h3>
 
-    <div class="totalTable">
-      <div class="tableRow">
+    <div class="totalTable w-50">
+      <div class="tableRow d-flex">
         <div class="colA"></div>
         <div class="colB">Gas</div>
-        <div class="colC"><span class="productTotal">$<span id="gasSavings"></span></span></div>
+        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="gasSavings"></span></span></div>
       </div>
-      <div class="tableRow">
+      <div class="tableRow d-flex">
         <div class="colA"></div>
         <div class="colB">Car Wash</div>
-        <div class="colC"><span class="productTotal">$<span id="washSavings"></span></span></div>
+        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="washSavings"></span></span></div>
       </div>
-      <div class="tableRow">
-        <div class="colA"></div>
-        <div class="colB">In-store</div>
-        <div class="colC"><span class="productTotal">$<span id="storeSavings"></span></span></div>
-      </div>
-      <div class="tableRow">
+      <div class="tableRow d-flex">
         <div class="colA">+</div>
+        <div class="colB">In-store</div>
+        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="storeSavings"></span></span></div>
+      </div>
+      <div class="tableRow d-flex">
+        <div class="colA"></div>
         <div class="colB">Yearly savings</div>
-        <div class="colC"><span class="productTotal">$<span id="savingsTotal"></span></span></div>
+        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="savingsTotal"></span></span></div>
       </div>
     </div>
   </div>
-  <button id="backToForm" class="buttonLookLikeLink" onclick="app.showFormHideResults()">Back to form</a>
+
+  <button id="backToForm" class="btn btn-link" onclick="app.showFormHideResults()">Back to form</a>
 </section>

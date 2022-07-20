@@ -1,24 +1,13 @@
 body {
-    padding: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-    color: #00b7ff;
-}
-
-.buttonLookLikeLink {
-    color: blue;
-    background: none;
-    margin: 0;
+#backToForm {
     padding: 0;
-    border: none;
-    cursor: pointer;
 }
 
-.totalTable {
-    max-width: 300px;
-}
 .totalTable .calcBottom {
     border-bottom: 4px double;
     padding-bottom: 4px;
@@ -32,12 +21,8 @@ a {
     font-size: 1.0625rem;
 }
 
-.tableRow {
-    display: flex;
-}
 .tableRow .productTotal {
     font-size: 1.125rem;
-    font-weight: 700;
 }
 .tableRow .colA {
     flex-basis: 20%;
@@ -47,5 +32,4 @@ a {
 }
 .tableRow .colC {
     flex-basis: 30%;
-    text-align: right;
 }
