@@ -59,6 +59,9 @@ const cleanGasData = cleanData.gasData,
           mbGasPriceCad: mbGasPriceUs * exchangeRate,
           onGasPriceCad: onGasPriceUs * exchangeRate,
         },
+        washData: {
+          name: ["Bronze", "Silver", "Gold"],
+        },
         cleanData: cleanData,
         fuelDiscount: cleanData.fuelDiscount,
         fullTankPerWeek: cleanData.fullTankPerWeek,
@@ -79,7 +82,7 @@ const cleanGasData = cleanData.gasData,
 
     hideShowWashType: () => {
       const appConfig = app.config,
-        eventTypes = ["change", "blur", "keyup"];
+        eventTypes = appConfig.eventTypes;
 
       const toggleWashType = (selectElement, selectValue, washTypeHolderDivIf, washTypeHolderDivElse) => {
         const washTypeDiv = appConfig.washTypeHolderDiv;
@@ -132,8 +135,11 @@ const cleanGasData = cleanData.gasData,
       const appConfig = app.config,
         tanksNUM = Number(numberOfTanks),
         sundriesNUM = Number(sundries),
+        bronzeWash = appConfig.washData.name[0],
+        silverWash = appConfig.washData.name[1],
+        goldWash = appConfig.washData.name[2],
         washData = (washPrice) => {
-          userSelectedWashPrice = washPrice
+          userSelectedWashPrice = washPrice;
           washWithTax = (numberOfWash * userSelectedWashPrice) * (1 + taxRate);
           washCostPerYear = washWithTax * weeksPerYear;
           washDiscount = washCostPerYear - (washCostPerYear * (appConfig.purchaseDiscount));
@@ -154,6 +160,9 @@ const cleanGasData = cleanData.gasData,
           fuelDiscountPerYear = calcFuel(fuelDiscount);
           fuelDiscountNUM = fuelDiscountPerYear;
         },
+        washDetails = (washPrice, washName) => {
+          washData(washPrice);
+          selectedWash = washName;
         };
 
       switch (locationFlag) {
@@ -168,18 +177,15 @@ const cleanGasData = cleanData.gasData,
 
       switch (washType) {
         case "silver":
-          washData(washPrice.silver);
-          selectedWash = "Silver";
+          washDetails(washPrice.silver, silverWash);
           break;
 
         case "gold":
-          washData(washPrice.gold);
-          selectedWash = "Gold";
+          washDetails(washPrice.gold, goldWash);
           break;
 
         default:
-          washData(washPrice.bronze);
-          selectedWash = "Bronze";
+          washDetails(washPrice.bronze, bronzeWash);
           break;
       }
 
