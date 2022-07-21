@@ -40,8 +40,6 @@ const cleanGasData = cleanData.gasData,
       context.config = {
         mainForm: document.getElementById("mainForm"),
         resultsDiv: document.getElementById("results"),
-        mbGasPriceCad: mbGasPriceUs * exchangeRate,
-        onGasPriceCad: onGasPriceUs * exchangeRate,
         form: document.querySelector("form"),
         selectElement: document.getElementById("wash"),
         washTypeHolderDiv: document.getElementById("washTypeHolder"),
@@ -56,7 +54,11 @@ const cleanGasData = cleanData.gasData,
         totalTable: document.querySelector(".totalTable"),
         locationOn: "on",
         locationMb: "mb",
-        discountAmount: 0.05,
+        discountAmount: 0.03,
+        fuelData: {
+          mbGasPriceCad: mbGasPriceUs * exchangeRate,
+          onGasPriceCad: onGasPriceUs * exchangeRate,
+        },
         cleanData: cleanData,
         fuelDiscount: cleanData.fuelDiscount,
         fullTankPerWeek: cleanData.fullTankPerWeek,
@@ -143,23 +145,24 @@ const cleanGasData = cleanData.gasData,
         instoreDiscount = (instoreCostPerYear * appConfig.purchaseDiscount),
         storeDiscountNUM = Number(instoreDiscount),
         gasPriceTreatment = (locationGasPrice) => {
-          const litresPerWeek = () => {
-            const litresPerWeek = fullTankPerWeek * tanksNUM;
-            return litresPerWeek;
+          const calcFuel = (fuelMultiplier) => {
+            return (fullTankPerWeek * tanksNUM * fuelMultiplier) * weeksPerYear
           };
+
           gasPriceNUM = Number(locationGasPrice.toFixed(2));
-          fuelCostPerYear = (litresPerWeek() * gasPriceNUM) * weeksPerYear;
-          fuelDiscountPerYear = (litresPerWeek() * fuelDiscount) * weeksPerYear;
+          fuelCostPerYear = calcFuel(gasPriceNUM);
+          fuelDiscountPerYear = calcFuel(fuelDiscount);
           fuelDiscountNUM = fuelDiscountPerYear;
+        },
         };
 
       switch (locationFlag) {
         case "mb":
-          gasPriceTreatment(appConfig.mbGasPriceCad);
+          gasPriceTreatment(appConfig.fuelData.mbGasPriceCad);
           break;
 
         default:
-          gasPriceTreatment(appConfig.onGasPriceCad);
+          gasPriceTreatment(appConfig.fuelData.onGasPriceCad);
           break;
       }
 
