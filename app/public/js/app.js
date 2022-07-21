@@ -111,8 +111,9 @@ const cleanGasData = cleanData.gasData,
 
     calcTblBtmTreatment: () => {
       let totalTable = app.config.totalTable,
-        calcBottom = totalTable.children[2],
-        sumRow = totalTable.children[3],
+        tableChildren = totalTable.children,
+        calcBottom = tableChildren[2],
+        sumRow = tableChildren[3],
         calcBottomClass = ["calcBottom", "mb-1"],
         sumRowClass = ["sumRow", "mb-1"];
 
@@ -185,7 +186,7 @@ const cleanGasData = cleanData.gasData,
       const displaySavings = (productHolder, productQty, productName, savingsHolder, savingsAmount, purchaseInfo, saveInfo, productPY) => {
         productHolder.innerHTML = ``;
         productHolder.innerHTML = `
-        <p>User purchases <span class="font-weight-bold">${productQty}</span> ${productName} per week ${purchaseInfo} for around <span class="font-weight-bold">$${productPY}</span> per year and saves <span class="font-weight-bold">$${savingsAmount.toFixed(2)}</span> per year after ${saveInfo}</p>
+          <p>User purchases <span class="font-weight-bold">${productQty}</span> ${productName} per week ${purchaseInfo} for around <span class="font-weight-bold">$${productPY}</span> per year and saves <span class="font-weight-bold">$${savingsAmount.toFixed(2)}</span> per year after ${saveInfo}</p>
         `;
         savingsHolder.innerHTML = ``;
         savingsHolder.innerHTML = savingsAmount.toFixed(2);
