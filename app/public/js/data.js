@@ -31,58 +31,58 @@ options = {
 },
 gasPriceApi = { // https://rapidapi.com/collectapi/api/gas-price/
   success: true,
-  result: [
-    {
-      "name": "Alberta",
-      "currency": "usd",
-      "gasoline": "1.64",
-    },
-    {
-      "name": "British Columbia",
-      "currency": "usd",
-      "gasoline": "1.93",
-    },
-    {
-      "name": "Manitoba",
-      "currency": "usd",
-      "gasoline": "1.68",
-    },
-    {
-      "name": "New Brunswick",
-      "currency": "usd",
-      "gasoline": "1.72",
-    },
-    {
-      "name": "Newfoundland and Labrador",
-      "currency": "usd",
-      "gasoline": "1.81",
-    },
-    {
-      "name": "Nova Scotia",
-      "currency": "usd",
-      "gasoline": "1.68",
-    },
-    {
-      "name": "Ontario",
-      "currency": "usd",
-      "gasoline": "1.76",
-    },
-    {
-      "name": "Prince Edward Island",
-      "currency": "usd",
-      "gasoline": "1.74",
-    },
-    {
-      "name": "Quebec",
-      "currency": "usd",
-      "gasoline": "1.79",
-    },
-    {
-      "name": "Saskatchewan",
-      "currency": "usd",
-      "gasoline": "1.70",
-    },
-  ],
+    result: [
+      {
+        "name": "Alberta",
+        "currency": "usd",
+        "gasoline": "1.79"
+      },
+      {
+        "name": "British Columbia",
+        "currency": "usd",
+        "gasoline": "2.01"
+      },
+      {
+        "name": "Manitoba",
+        "currency": "usd",
+        "gasoline": "1.85"
+      },
+      {
+        "name": "New Brunswick",
+        "currency": "usd",
+        "gasoline": "1.91"
+      },
+      {
+        "name": "Newfoundland and Labrador",
+        "currency": "usd",
+        "gasoline": "2.02"
+      },
+      {
+        "name": "Nova Scotia",
+        "currency": "usd",
+        "gasoline": "1.85"
+      },
+      {
+        "name": "Ontario",
+        "currency": "usd",
+        "gasoline": "1.77"
+      },
+      {
+        "name": "Prince Edward Island",
+        "currency": "usd",
+        "gasoline": "1.92"
+      },
+      {
+        "name": "Quebec",
+        "currency": "usd",
+        "gasoline": "1.92"
+      },
+      {
+        "name": "Saskatchewan",
+        "currency": "usd",
+        "gasoline": "1.88"
+      }
+    ]
 },
 USD = "USD",
 currencyApi = { // https://fixer.io/

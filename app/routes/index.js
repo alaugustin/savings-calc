@@ -4,8 +4,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
-    title: 'Savings Calcuator',
-    selectProvinceLabel: 'Select a province',
+    title: 'Fuel Savings Calculator',
+    selectProvinceLabel: 'Select a province.',
     provinceList: [
       {
         name: "Ontario",
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
       }
     ],
     gasTankLabel: 'How many tanks of gas per week?',
-    washLable: 'How many car washes per week do you purchase along with gas?',
+    washLable: 'How many car washes per week do you purchase?',
     washTypeLable: 'What type of car wash do you purchase?',
     washList: [
       {

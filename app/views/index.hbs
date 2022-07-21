@@ -3,7 +3,8 @@
 <hr>
 
 <form id="mainForm" method="post">
-  <h2>{{selectProvinceLabel}}</h2>
+
+  <label>{{selectProvinceLabel}}</label>
 
   <div class="form-group">
     {{#each provinceList}}
@@ -42,25 +43,24 @@
 </form>
 
 <section id="resultsCollection">
-  <h2>Example of yearly savings </h2>
 
-  <div>
-    <h3>Fuel savings</h3>
+  <div class="prodResultHolder">
+    <h2>Fuel savings</h2>
     <div id="gasResult"></div>
   </div>
 
-  <div>
-    <h3>Car wash savings</h3>
+  <div class="prodResultHolder">
+    <h2>Car wash savings</h2>
     <div id="washResult"></div>
   </div>
 
-  <div>
-    <h3>In-store savings</h3>
+  <div class="prodResultHolder">
+    <h2>In-store savings</h2>
     <div id="sundriesResult"></div>
   </div>
 
   <div id="totalResult">
-    <h3>Total Savings</h3>
+    <h2>Total Savings</h2>
 
     <div class="totalTable w-50">
       <div class="tableRow d-flex">
@@ -86,5 +86,5 @@
     </div>
   </div>
 
-  <button id="backToForm" class="btn btn-link" onclick="app.showFormHideResults()">Back to form</a>
+  <button id="backToForm" class="btn btn-link mt-4" onclick="app.showFormHideResults()">Back to form</a>
 </section>

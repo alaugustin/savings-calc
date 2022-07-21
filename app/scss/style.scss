@@ -4,6 +4,15 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+#resultsCollection {
+  .prodResultHolder {
+    margin-top: 1.52rem;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
 #backToForm {padding: 0;}
 
 .totalTable {
@@ -15,14 +24,17 @@ body {
   .sumRow {margin-bottom: 16px;}
 }
 
-#totalResult {font-size: 1.0625rem;}
+#totalResult {
+  font-size: 1.0625rem;
+  margin-top: 1.52rem;
+}
 
 .tableRow {
   .productTotal {font-size: 1.125rem;}
 
   .col {
-    &A {flex-basis: 20%;}
+    &A {flex-basis: 10%;}
     &B {flex-basis: 50%;}
-    &C {flex-basis: 30%;}
+    &C {flex-basis: 40%;}
   }
 }

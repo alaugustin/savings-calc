@@ -73,7 +73,6 @@ const cleanGasData = cleanData.gasData,
     onDomReady: () => {
       app.hideShowWashType();
       resultsCollection.style.display = "none";
-      // console.log(app.config.purchaseDiscount);
     },
 
     hideShowWashType: () => {
@@ -126,26 +125,43 @@ const cleanGasData = cleanData.gasData,
         addClass(sumRow, sumRowClass);
     },
 
-    resultsDisplay: (locationFlag, fullTankPerWeek, fuelDiscount, weeksPerYear, numberOfTanks, gasPriceCadFixed, numberOfWash, washType, sundries, taxRate, taxType) => {
+    resultsDisplay: (numberOfTanks, numberOfWash, sundries, locationFlag, taxRate, fullTankPerWeek, fuelDiscount, weeksPerYear, washType) => {
 
       const appConfig = app.config,
-        gasPriceNUM = Number(gasPriceCadFixed),
         tanksNUM = Number(numberOfTanks),
-        fuelCostPerYear = ((appConfig.fullTankPerWeek * numberOfTanks) * gasPriceNUM) * appConfig.weeksPerYear,
-        fuelDiscountPerYear = ((appConfig.fullTankPerWeek * tanksNUM) * appConfig.fuelDiscount) * appConfig.weeksPerYear,
-        fuelDiscountNUM = Number(fuelDiscountPerYear.toFixed(2)),
+        sundriesNUM = Number(sundries),
         washData = (washPrice) => {
           userSelectedWashPrice = washPrice
           washWithTax = (numberOfWash * userSelectedWashPrice) * (1 + taxRate);
-          washCostPerYear = washWithTax * appConfig.weeksPerYear;
+          washCostPerYear = washWithTax * weeksPerYear;
           washDiscount = washCostPerYear - (washCostPerYear * (appConfig.purchaseDiscount));
           withDiscount = (washCostPerYear * appConfig.purchaseDiscount),
           washDiscountNUM = Number(withDiscount);
         },
-        instorePerWeekWitTax = sundries * (1 + taxRate),
-        instoreCostPerYear = instorePerWeekWitTax * appConfig.weeksPerYear,
+        instorePerWeekWitTax = sundriesNUM * (1 + taxRate),
+        instoreCostPerYear = instorePerWeekWitTax * weeksPerYear,
         instoreDiscount = (instoreCostPerYear * appConfig.purchaseDiscount),
-        storeDiscountNUM = Number(instoreDiscount);
+        storeDiscountNUM = Number(instoreDiscount),
+        gasPriceTreatment = (locationGasPrice) => {
+          const litresPerWeek = () => {
+            const litresPerWeek = fullTankPerWeek * tanksNUM;
+            return litresPerWeek;
+          };
+          gasPriceNUM = Number(locationGasPrice.toFixed(2));
+          fuelCostPerYear = (litresPerWeek() * gasPriceNUM) * weeksPerYear;
+          fuelDiscountPerYear = (litresPerWeek() * fuelDiscount) * weeksPerYear;
+          fuelDiscountNUM = fuelDiscountPerYear;
+        };
+
+      switch (locationFlag) {
+        case "mb":
+          gasPriceTreatment(appConfig.mbGasPriceCad);
+          break;
+
+        default:
+          gasPriceTreatment(appConfig.onGasPriceCad);
+          break;
+      }
 
       switch (washType) {
         case "silver":
@@ -181,11 +197,16 @@ const cleanGasData = cleanData.gasData,
         washPurchaseInfo = `for <span class="font-weight-bold">$${washWithTax.toFixed(2)}</span> after tax`,
         storePurchaseInfo = `after tax`,
         gasSavingsInfo = `fuel discount of <span class="font-weight-bold">$${app.config.fuelDiscount}</span> per litre.`,
-        washSavingsInfo = `car wash discount of <span class="font-weight-bold">$${tenPercent}%</span>.`,
-        storeSavingsInfo = `in-store discount of <span class="font-weight-bold">$${tenPercent}%</span>.`,
+        washStoreEnd = `discount of <span class="font-weight-bold">${tenPercent}%</span>.`,
         gasPY = fuelCostPerYear.toFixed(2),
         washPY = washCostPerYear.toFixed(2),
         storePY = instoreCostPerYear.toFixed(2);
+
+      let washSavingsInfo = `car wash `,
+        storeSavingsInfo = `in-store `;
+
+      washSavingsInfo = washSavingsInfo + washStoreEnd;
+      storeSavingsInfo = storeSavingsInfo + washStoreEnd;
 
       displaySavings(gasResult, tanksNUM, gasPurchaseDesc, gasSavings, fuelDiscountNUM, gasPurchaseInfo, gasSavingsInfo, gasPY);
       displaySavings(washResult, numberOfWash, washPurchaseDesc, washSavings, washDiscountNUM, washPurchaseInfo, washSavingsInfo, washPY);
@@ -238,19 +259,20 @@ const cleanGasData = cleanData.gasData,
     },
 
     calculateTax: (location, taxRate) => {
+      const getLocationTax = (selectedLocationName) => {
+        (locationFlag = location),
+          (locationName = selectedLocationName.name),
+          (taxRate = taxRate);
+        app.consolodateRequest(location, taxRate);
+      };
+
       switch (location) {
         case "mb":
-          (locationFlag = location),
-          (locationName = mbData.name),
-          (taxRate = taxRate);
-          app.consolodateRequest(location, taxRate);
+          getLocationTax(mbData);
           break;
 
         default:
-          (locationFlag = location),
-          (locationName = onData.name),
-          (taxRate = taxRate);
-          app.consolodateRequest(location, taxRate);
+          getLocationTax(onData);
           return;
       }
     },
@@ -285,25 +307,17 @@ const cleanGasData = cleanData.gasData,
       );
 
       app.resultsDisplay(
-        appData.userLocation,
-        appData.fullTankPerWeek,
-        appConfig.fuelDiscount,
-        appConfig.weeksPerYear,
         appData.numberOfTanks,
-        appData.userLocation === "on"
-          ? appConfig.gasData.result[6].gasoline
-          : appConfig.gasData.result[2].gasoline,
         appData.numberOfWash,
-        appData.washType,
         appData.sundries,
+        appData.userLocation,
         appData.userLocation === "on"
           ? onData.applicable
           : mbData.applicable,
-        appData.userLocation === "on"
-          ? onData.type
-          : mbData.type,
-        appData.washDiscount,
-        appData.sundriesDiscount
+        appData.fullTankPerWeek,
+        appConfig.fuelDiscount,
+        appConfig.weeksPerYear,
+        appData.washType,
       );
     },
 
