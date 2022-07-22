@@ -1,6 +1,7 @@
 {
-  "name": "app",
-  "version": "0.0.0",
+  "name": "savings-calc",
+  "version": "1.0.0",
+  "description": "A gas bar saving calculator POC",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
