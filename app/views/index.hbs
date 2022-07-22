@@ -1,87 +1,99 @@
-<h1>{{title}}</h1>
+<div id="headingHolder" class="row mb-4">
+  <div class="col-12">
+    <h1 class="pb-4">{{title}}</h1>
+  </div>
+</div>
 
-<hr>
+<section class="row"> <div class="col-sm-12 col-md-10 col-lg-8 col-xl-8">
+    <form id="mainForm" method="post">
 
-<form id="mainForm" method="post">
+      <label>{{selectProvinceLabel}}</label>
 
-  <label>{{selectProvinceLabel}}</label>
-
-  <div class="form-group">
-    {{#each provinceList}}
-      <div class="form-check form-check-inline">
-        <input type="radio" id="{{this.locationFlag}}" class="form-check-input" name="location" value="{{this.locationFlag}}" required>
-        <label class="form-check-label" for="{{this.locationFlag}}">{{this.name}}</label>
+      <div class="form-group">
+        {{#each provinceList}}
+        <div class="form-check form-check-inline">
+          <input type="radio" id="{{this.locationFlag}}" class="form-check-input" name="location"
+            value="{{this.locationFlag}}" required>
+          <label class="form-check-label" for="{{this.locationFlag}}">{{this.name}}</label>
+        </div>
+        {{/each}}
       </div>
-    {{/each}}
+
+      <div class="form-group">
+        <label for="gas">{{gasTankLabel}}</label><br>
+        <input type="number" id="gas" class="form-control form-control-sm" name="gas" placeholder="0" min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="wash">{{washLable}}</label><br>
+        <input type="number" id="wash" class="form-control form-control-sm" name="wash" placeholder="0" min="0">
+      </div>
+
+      <div id="washTypeHolder" class="form-group">
+        <label for="washType">{{washTypeLable}}</label><br>
+        <select name="washType" id="washType" class="form-control form-control-sm">
+          {{#each washList}}
+          <option value="{{this.washType}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sundries">{{sundriesLabel}}</label><br>
+        <input type="number" step=".01" id="sundries" class="form-control form-control-sm" name="sundries"
+          placeholder="0.00" min="0" required>
+      </div>
+
+      <button type="submit" class="btn btn-outline-secondary btn-sm">Submit</button>
+    </form>
   </div>
+</section>
 
-  <div class="form-group">
-    <label for="gas">{{gasTankLabel}}</label><br>
-    <input type="number" id="gas" class="form-control form-control-sm" name="gas" placeholder="0" min="0">
-  </div>
+<section id="resultsCollection"class="row">
+  <div class="col-sm-12 col-md-10 col-lg-8 col-xl-8">
 
-  <div class="form-group">
-    <label for="wash">{{washLable}}</label><br>
-    <input type="number" id="wash" class="form-control form-control-sm" name="wash" placeholder="0" min="0">
-  </div>
+    <div class="prodResultHolder">
+      <h2>Fuel savings</h2>
+      <div id="gasResult"></div>
+    </div>
 
-  <div id="washTypeHolder" class="form-group">
-    <label for="washType">{{washTypeLable}}</label><br>
-    <select name="washType" id="washType" class="form-control form-control-sm">
-      {{#each washList}}
-      <option value="{{this.washType}}">{{this.name}}</option>
-      {{/each}}
-    </select>
-  </div>
+    <div class="prodResultHolder">
+      <h2>Car wash savings</h2>
+      <div id="washResult"></div>
+    </div>
 
-  <div class="form-group">
-    <label for="sundries">{{sundriesLabel}}</label><br>
-    <input type="number" step=".01" id="sundries" class="form-control form-control-sm" name="sundries" placeholder="0.00" min="0" required>
-  </div>
+    <div class="prodResultHolder">
+      <h2>In-store savings</h2>
+      <div id="sundriesResult"></div>
+    </div>
 
-  <button type="submit" class="btn btn-outline-secondary btn-sm">Submit</button>
-</form>
-
-<section id="resultsCollection">
-
-  <div class="prodResultHolder">
-    <h2>Fuel savings</h2>
-    <div id="gasResult"></div>
-  </div>
-
-  <div class="prodResultHolder">
-    <h2>Car wash savings</h2>
-    <div id="washResult"></div>
-  </div>
-
-  <div class="prodResultHolder">
-    <h2>In-store savings</h2>
-    <div id="sundriesResult"></div>
-  </div>
-
-  <div id="totalResult">
     <h2>Total Savings</h2>
-
-    <div class="totalTable w-50">
-      <div class="tableRow d-flex">
-        <div class="colA"></div>
-        <div class="colB">Gas</div>
-        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="gasSavings"></span></span></div>
-      </div>
-      <div class="tableRow d-flex">
-        <div class="colA"></div>
-        <div class="colB">Car Wash</div>
-        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="washSavings"></span></span></div>
-      </div>
-      <div class="tableRow d-flex">
-        <div class="colA">+</div>
-        <div class="colB">In-store</div>
-        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="storeSavings"></span></span></div>
-      </div>
-      <div class="tableRow d-flex">
-        <div class="colA"></div>
-        <div class="colB">Yearly savings</div>
-        <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="savingsTotal"></span></span></div>
+    <div class="row">
+      <div class="totalTable col-md-5 col-lg-4">
+        <div class="tableRow d-flex">
+          <div class="colA"></div>
+          <div class="colB">Gas</div>
+          <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="gasSavings"></span></span>
+          </div>
+        </div>
+        <div class="tableRow d-flex">
+          <div class="colA"></div>
+          <div class="colB">Car Wash</div>
+          <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="washSavings"></span></span>
+          </div>
+        </div>
+        <div class="tableRow d-flex">
+          <div class="colA">+</div>
+          <div class="colB">In-store</div>
+          <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="storeSavings"></span></span>
+          </div>
+        </div>
+        <div class="tableRow d-flex">
+          <div class="colA"></div>
+          <div class="colB">Yearly savings</div>
+          <div class="colC text-right"><span class="productTotal font-weight-bold">$<span id="savingsTotal"></span></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

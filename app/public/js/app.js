@@ -192,14 +192,15 @@ const cleanGasData = cleanData.gasData,
         savingsHolder.innerHTML = savingsAmount.toFixed(2);
       };
 
-      const tenPercent = app.config.purchaseDiscount * 100,
+      const tenPercent = appConfig.purchaseDiscount * 100,
+        threeCents = appConfig.fuelDiscount * 100,
         gasPurchaseDesc = `tank(s) of gas`,
         washPurchaseDesc = `${selectedWash} car wash(es)`,
         storePurchaseDesc = `in store`,
         gasPurchaseInfo = `at an average price of <span class="font-weight-bold">$${gasPriceNUM}</span> per litre`,
         washPurchaseInfo = `for <span class="font-weight-bold">$${washWithTax.toFixed(2)}</span> after tax`,
         storePurchaseInfo = `after tax`,
-        gasSavingsInfo = `fuel discount of <span class="font-weight-bold">$${app.config.fuelDiscount}</span> per litre.`,
+        gasSavingsInfo = `fuel discount of <span class="font-weight-bold">${threeCents}¢</span> per litre.`,
         washStoreEnd = `discount of <span class="font-weight-bold">${tenPercent}%</span>.`,
         gasPY = fuelCostPerYear.toFixed(2),
         washPY = washCostPerYear.toFixed(2),

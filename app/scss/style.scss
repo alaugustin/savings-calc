@@ -4,6 +4,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+#headingHolder {
+  h1 {border-bottom: 1px solid #e5e5e5;}
+}
+
 #resultsCollection {
   .prodResultHolder {
     margin-top: 1.52rem;
